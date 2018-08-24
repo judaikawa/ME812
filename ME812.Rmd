@@ -1,0 +1,46 @@
+---
+title: "Projeto ME812"
+output: html_notebook
+---
+
+Estudo qualitativo-quantitativo de florestas sagradas em Moçambique
+
+Lembrete: Se certificar que está na pasta correta, que contém os dados com getwd() e na hora de salvar usar UTF-8
+
+Bibliotecas
+Inserir aqui as bibliotecas necessárias (se não tiver no pc, instalar antes)
+```{r}
+library(xlsx)
+```
+
+
+Dados
+
+Q1
+```{r}
+
+q1 <- 
+
+```
+
+Q2
+```{r}
+
+q2 <- 
+
+```
+
+Q3
+```{r}
+
+q3 <- 
+
+```
+
+Q6
+```{r}
+
+q6 <- 
+
+```
+
