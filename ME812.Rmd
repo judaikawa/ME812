@@ -10,37 +10,92 @@ Lembrete: Se certificar que está na pasta correta, que contém os dados com get
 Bibliotecas
 Inserir aqui as bibliotecas necessárias (se não tiver no pc, instalar antes)
 ```{r}
-library(xlsx)
+library(readxl)
 ```
 
 
 Dados
 
-Q1
 ```{r}
 
-q1 <- 
+q1 <- read_excel("Q1_ Perfil dos Entrevistados.xlsx", sheet = 1)
 
 ```
 
 Q2
 ```{r}
 
-q2 <- 
+q2 <- read_excel("Q2_ Nome vulgar da Mata e Sacralidade.xlsx", sheet = 1)
 
 ```
 
 Q3
 ```{r}
 
-q3 <- 
+q3 <- read_excel("Q3_ Propriedade e Responsabilidade pela Gestão da Mata.xlsx", sheet = 1)
+
+```
+
+Q4
+```{r}
+
+q4 <- read_excel("Q4_ Estado de conservação e Critérios.xlsx", sheet = 1)
+
+```
+
+Q4_1
+```{r}
+
+q4_1 <- read_excel("Q4_1 Estado de Conservação_ Risco de desaparacimento.xlsx", sheet = 1)
+
+```
+
+Q5
+```{r}
+
+q5 <- read_excel("Q5_ Serviços Ecossistêmicos.xlsx", sheet = 1)
+
+```
+
+Q5_1
+```{r}
+
+q5_1 <- read_excel("Q5_1 Serviços Ecossistêmicos _Tendência da Qualidade.xlsx", sheet = 1)
+
+```
+
+Q5_2
+```{r}
+
+q5_2 <- read_excel("Q5_2 Serviços Ecossistêmicos Potenciais (Animais).xlsx", sheet = 1)
+
+```
+
+Q5_3
+```{r}
+
+q5_3 <- read_excel("Q5_3 Serviços Ecossistêmicos Potenciais (Plantas).xlsx", sheet = 1)
 
 ```
 
 Q6
 ```{r}
 
-q6 <- 
+q6 <- read_excel("Q6_  Conhecimento Sobre as Instituições.xlsx", sheet = 1)
+
+```
+
+Q6_1
+```{r}
+
+q6_1 <- read_excel("Q6_ 1 Eficiência das Instituições.xlsx", sheet = 1)
+
+```
+
+Q6_2
+```{r}
+
+q6_2 <- read_excel("Q6_ 2 Sanções.xlsx", sheet = 1)
 
 ```
 

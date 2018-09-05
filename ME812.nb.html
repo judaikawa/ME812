@@ -181,55 +181,110 @@ $(document).ready(function () {
 <p>Bibliotecas Inserir aqui as bibliotecas necessárias (se não tiver no pc, instalar antes)</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh4bHN4KVxuYGBgIn0= -->
-<pre class="r"><code>library(xlsx)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShyZWFkeGwpXG5gYGAifQ== -->
+<pre class="r"><code>library(readxl)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Dados</p>
-<p>Q1</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5xMSA8LSBcblxuYGBgIn0= -->
-<pre class="r"><code>
-q1 &lt;- 
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucTEgPC0gcmVhZF9leGNlbChcIlExXyBQZXJmaWwgZG9zIEVudHJldmlzdGFkb3MueGxzeFwiLCBzaGVldCA9IDEpXG5gYGAifQ== -->
+<pre class="r"><code>q1 &lt;- read_excel(&quot;Q1_ Perfil dos Entrevistados.xlsx&quot;, sheet = 1)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Q2</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5xMiA8LSBcblxuYGBgIn0= -->
-<pre class="r"><code>
-q2 &lt;- 
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucTIgPC0gcmVhZF9leGNlbChcIlEyXyBOb21lIHZ1bGdhciBkYSBNYXRhIGUgU2FjcmFsaWRhZGUueGxzeFwiLCBzaGVldCA9IDEpXG5gYGAifQ== -->
+<pre class="r"><code>q2 &lt;- read_excel(&quot;Q2_ Nome vulgar da Mata e Sacralidade.xlsx&quot;, sheet = 1)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Q3</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5xMyA8LSBcblxuYGBgIn0= -->
-<pre class="r"><code>
-q3 &lt;- 
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucTMgPC0gcmVhZF9leGNlbChcIlEzXyBQcm9wcmllZGFkZSBlIFJlc3BvbnNhYmlsaWRhZGUgcGVsYSBHZXN0w6NvIGRhIE1hdGEueGxzeFwiLCBzaGVldCA9IDEpXG5gYGAifQ== -->
+<pre class="r"><code>q3 &lt;- read_excel(&quot;Q3_ Propriedade e Responsabilidade pela Gestão da Mata.xlsx&quot;, sheet = 1)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Q4</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucTQgPC0gcmVhZF9leGNlbChcIlE0XyBFc3RhZG8gZGUgY29uc2VydmHDp8OjbyBlIENyaXTDqXJpb3MueGxzeFwiLCBzaGVldCA9IDEpXG5gYGAifQ== -->
+<pre class="r"><code>q4 &lt;- read_excel(&quot;Q4_ Estado de conservação e Critérios.xlsx&quot;, sheet = 1)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Q4_1</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucTRfMSA8LSByZWFkX2V4Y2VsKFwiUTRfMSBFc3RhZG8gZGUgQ29uc2VydmHDp8Ojb18gUmlzY28gZGUgZGVzYXBhcmFjaW1lbnRvLnhsc3hcIiwgc2hlZXQgPSAxKVxuYGBgIn0= -->
+<pre class="r"><code>q4_1 &lt;- read_excel(&quot;Q4_1 Estado de Conservação_ Risco de desaparacimento.xlsx&quot;, sheet = 1)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Q5</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucTUgPC0gcmVhZF9leGNlbChcIlE1XyBTZXJ2acOnb3MgRWNvc3Npc3TDqm1pY29zLnhsc3hcIiwgc2hlZXQgPSAxKVxuYGBgIn0= -->
+<pre class="r"><code>q5 &lt;- read_excel(&quot;Q5_ Serviços Ecossistêmicos.xlsx&quot;, sheet = 1)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Q5_1</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucTVfMSA8LSByZWFkX2V4Y2VsKFwiUTVfMSBTZXJ2acOnb3MgRWNvc3Npc3TDqm1pY29zIF9UZW5kw6puY2lhIGRhIFF1YWxpZGFkZS54bHN4XCIsIHNoZWV0ID0gMSlcbmBgYCJ9 -->
+<pre class="r"><code>q5_1 &lt;- read_excel(&quot;Q5_1 Serviços Ecossistêmicos _Tendência da Qualidade.xlsx&quot;, sheet = 1)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Q5_2</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucTVfMiA8LSByZWFkX2V4Y2VsKFwiUTVfMiBTZXJ2acOnb3MgRWNvc3Npc3TDqm1pY29zIFBvdGVuY2lhaXMgKEFuaW1haXMpLnhsc3hcIiwgc2hlZXQgPSAxKVxuYGBgIn0= -->
+<pre class="r"><code>q5_2 &lt;- read_excel(&quot;Q5_2 Serviços Ecossistêmicos Potenciais (Animais).xlsx&quot;, sheet = 1)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Q5_3</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucTVfMyA8LSByZWFkX2V4Y2VsKFwiUTVfMyBTZXJ2acOnb3MgRWNvc3Npc3TDqm1pY29zIFBvdGVuY2lhaXMgKFBsYW50YXMpLnhsc3hcIiwgc2hlZXQgPSAxKVxuYGBgIn0= -->
+<pre class="r"><code>q5_3 &lt;- read_excel(&quot;Q5_3 Serviços Ecossistêmicos Potenciais (Plantas).xlsx&quot;, sheet = 1)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Q6</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5xNiA8LSBcblxuYGBgIn0= -->
-<pre class="r"><code>
-q6 &lt;- 
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucTYgPC0gcmVhZF9leGNlbChcIlE2XyAgQ29uaGVjaW1lbnRvIFNvYnJlIGFzIEluc3RpdHVpw6fDtWVzLnhsc3hcIiwgc2hlZXQgPSAxKVxuYGBgIn0= -->
+<pre class="r"><code>q6 &lt;- read_excel(&quot;Q6_  Conhecimento Sobre as Instituições.xlsx&quot;, sheet = 1)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Q6_1</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucTZfMSA8LSByZWFkX2V4Y2VsKFwiUTZfIDEgRWZpY2nDqm5jaWEgZGFzIEluc3RpdHVpw6fDtWVzLnhsc3hcIiwgc2hlZXQgPSAxKVxuYGBgIn0= -->
+<pre class="r"><code>q6_1 &lt;- read_excel(&quot;Q6_ 1 Eficiência das Instituições.xlsx&quot;, sheet = 1)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Q6_2</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucTZfMiA8LSByZWFkX2V4Y2VsKFwiUTZfIDIgU2Fuw6fDtWVzLnhsc3hcIiwgc2hlZXQgPSAxKVxuYGBgIn0= -->
+<pre class="r"><code>q6_2 &lt;- read_excel(&quot;Q6_ 2 Sanções.xlsx&quot;, sheet = 1)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUHJvamV0byBNRTgxMiIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKRXN0dWRvIHF1YWxpdGF0aXZvLXF1YW50aXRhdGl2byBkZSBmbG9yZXN0YXMgc2FncmFkYXMgZW0gTW/Dp2FtYmlxdWUKCkxlbWJyZXRlOiBTZSBjZXJ0aWZpY2FyIHF1ZSBlc3TDoSBuYSBwYXN0YSBjb3JyZXRhLCBxdWUgY29udMOpbSBvcyBkYWRvcyBjb20gZ2V0d2QoKSBlIG5hIGhvcmEgZGUgc2FsdmFyIHVzYXIgVVRGLTgKCkJpYmxpb3RlY2FzCkluc2VyaXIgYXF1aSBhcyBiaWJsaW90ZWNhcyBuZWNlc3PDoXJpYXMgKHNlIG7Do28gdGl2ZXIgbm8gcGMsIGluc3RhbGFyIGFudGVzKQpgYGB7cn0KbGlicmFyeSh4bHN4KQpgYGAKCgpEYWRvcwoKUTEKYGBge3J9CgpxMSA8LSAKCmBgYAoKUTIKYGBge3J9CgpxMiA8LSAKCmBgYAoKUTMKYGBge3J9CgpxMyA8LSAKCmBgYAoKUTYKYGBge3J9CgpxNiA8LSAKCmBgYAoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUHJvamV0byBNRTgxMiIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKRXN0dWRvIHF1YWxpdGF0aXZvLXF1YW50aXRhdGl2byBkZSBmbG9yZXN0YXMgc2FncmFkYXMgZW0gTW/Dp2FtYmlxdWUKCkxlbWJyZXRlOiBTZSBjZXJ0aWZpY2FyIHF1ZSBlc3TDoSBuYSBwYXN0YSBjb3JyZXRhLCBxdWUgY29udMOpbSBvcyBkYWRvcyBjb20gZ2V0d2QoKSBlIG5hIGhvcmEgZGUgc2FsdmFyIHVzYXIgVVRGLTgKCkJpYmxpb3RlY2FzCkluc2VyaXIgYXF1aSBhcyBiaWJsaW90ZWNhcyBuZWNlc3PDoXJpYXMgKHNlIG7Do28gdGl2ZXIgbm8gcGMsIGluc3RhbGFyIGFudGVzKQpgYGB7cn0KbGlicmFyeShyZWFkeGwpCmBgYAoKCkRhZG9zCgpgYGB7cn0KCnExIDwtIHJlYWRfZXhjZWwoIlExXyBQZXJmaWwgZG9zIEVudHJldmlzdGFkb3MueGxzeCIsIHNoZWV0ID0gMSkKCmBgYAoKUTIKYGBge3J9CgpxMiA8LSByZWFkX2V4Y2VsKCJRMl8gTm9tZSB2dWxnYXIgZGEgTWF0YSBlIFNhY3JhbGlkYWRlLnhsc3giLCBzaGVldCA9IDEpCgpgYGAKClEzCmBgYHtyfQoKcTMgPC0gcmVhZF9leGNlbCgiUTNfIFByb3ByaWVkYWRlIGUgUmVzcG9uc2FiaWxpZGFkZSBwZWxhIEdlc3TDo28gZGEgTWF0YS54bHN4Iiwgc2hlZXQgPSAxKQoKYGBgCgpRNApgYGB7cn0KCnE0IDwtIHJlYWRfZXhjZWwoIlE0XyBFc3RhZG8gZGUgY29uc2VydmHDp8OjbyBlIENyaXTDqXJpb3MueGxzeCIsIHNoZWV0ID0gMSkKCmBgYAoKUTRfMQpgYGB7cn0KCnE0XzEgPC0gcmVhZF9leGNlbCgiUTRfMSBFc3RhZG8gZGUgQ29uc2VydmHDp8Ojb18gUmlzY28gZGUgZGVzYXBhcmFjaW1lbnRvLnhsc3giLCBzaGVldCA9IDEpCgpgYGAKClE1CmBgYHtyfQoKcTUgPC0gcmVhZF9leGNlbCgiUTVfIFNlcnZpw6dvcyBFY29zc2lzdMOqbWljb3MueGxzeCIsIHNoZWV0ID0gMSkKCmBgYAoKUTVfMQpgYGB7cn0KCnE1XzEgPC0gcmVhZF9leGNlbCgiUTVfMSBTZXJ2acOnb3MgRWNvc3Npc3TDqm1pY29zIF9UZW5kw6puY2lhIGRhIFF1YWxpZGFkZS54bHN4Iiwgc2hlZXQgPSAxKQoKYGBgCgpRNV8yCmBgYHtyfQoKcTVfMiA8LSByZWFkX2V4Y2VsKCJRNV8yIFNlcnZpw6dvcyBFY29zc2lzdMOqbWljb3MgUG90ZW5jaWFpcyAoQW5pbWFpcykueGxzeCIsIHNoZWV0ID0gMSkKCmBgYAoKUTVfMwpgYGB7cn0KCnE1XzMgPC0gcmVhZF9leGNlbCgiUTVfMyBTZXJ2acOnb3MgRWNvc3Npc3TDqm1pY29zIFBvdGVuY2lhaXMgKFBsYW50YXMpLnhsc3giLCBzaGVldCA9IDEpCgpgYGAKClE2CmBgYHtyfQoKcTYgPC0gcmVhZF9leGNlbCgiUTZfICBDb25oZWNpbWVudG8gU29icmUgYXMgSW5zdGl0dWnDp8O1ZXMueGxzeCIsIHNoZWV0ID0gMSkKCmBgYAoKUTZfMQpgYGB7cn0KCnE2XzEgPC0gcmVhZF9leGNlbCgiUTZfIDEgRWZpY2nDqm5jaWEgZGFzIEluc3RpdHVpw6fDtWVzLnhsc3giLCBzaGVldCA9IDEpCgpgYGAKClE2XzIKYGBge3J9CgpxNl8yIDwtIHJlYWRfZXhjZWwoIlE2XyAyIFNhbsOnw7Vlcy54bHN4Iiwgc2hlZXQgPSAxKQoKYGBgCgo=</div>
 
 
 
