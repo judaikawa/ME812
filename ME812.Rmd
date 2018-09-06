@@ -11,91 +11,55 @@ Bibliotecas
 Inserir aqui as bibliotecas necessárias (se não tiver no pc, instalar antes)
 ```{r}
 library(readxl)
+library(dplyr)
 ```
-
 
 Dados
 
 ```{r}
-
 q1 <- read_excel("Q1_ Perfil dos Entrevistados.xlsx", sheet = 1)
-
-```
-
-Q2
-```{r}
-
-q2 <- read_excel("Q2_ Nome vulgar da Mata e Sacralidade.xlsx", sheet = 1)
-
-```
-
-Q3
-```{r}
-
+q2 <- read_excel("Q2_ Nome vulgar da Mata e Sacralidade.xlsx", sheet = 1) # engloba totalmente q1
 q3 <- read_excel("Q3_ Propriedade e Responsabilidade pela Gestão da Mata.xlsx", sheet = 1)
-
-```
-
-Q4
-```{r}
-
 q4 <- read_excel("Q4_ Estado de conservação e Critérios.xlsx", sheet = 1)
-
-```
-
-Q4_1
-```{r}
-
 q4_1 <- read_excel("Q4_1 Estado de Conservação_ Risco de desaparacimento.xlsx", sheet = 1)
-
-```
-
-Q5
-```{r}
-
 q5 <- read_excel("Q5_ Serviços Ecossistêmicos.xlsx", sheet = 1)
-
-```
-
-Q5_1
-```{r}
-
 q5_1 <- read_excel("Q5_1 Serviços Ecossistêmicos _Tendência da Qualidade.xlsx", sheet = 1)
-
-```
-
-Q5_2
-```{r}
-
 q5_2 <- read_excel("Q5_2 Serviços Ecossistêmicos Potenciais (Animais).xlsx", sheet = 1)
-
-```
-
-Q5_3
-```{r}
-
 q5_3 <- read_excel("Q5_3 Serviços Ecossistêmicos Potenciais (Plantas).xlsx", sheet = 1)
-
-```
-
-Q6
-```{r}
-
 q6 <- read_excel("Q6_  Conhecimento Sobre as Instituições.xlsx", sheet = 1)
-
-```
-
-Q6_1
-```{r}
-
 q6_1 <- read_excel("Q6_ 1 Eficiência das Instituições.xlsx", sheet = 1)
-
+q6_2 <- read_excel("Q6_ 2 Sanções.xlsx", sheet = 1)
 ```
 
-Q6_2
+Junção de todos os dados em uma única tabela
+
 ```{r}
+tb <- q2 %>% 
+  left_join(q3, by = "Id", suffix = c("", ".REPETIDO1")) %>% 
+  left_join(q4, by = "Id", suffix = c("", ".REPETIDO2")) %>%
+  left_join(q4_1, by = "Id", suffix = c("", ".REPETIDO3")) %>%
+  left_join(q5, by = "Id", suffix = c("", ".REPETIDO4")) %>%
+  left_join(q5_1, by = "Id", suffix = c("", ".REPETIDO5")) %>%
+  left_join(q5_2, by = "Id", suffix = c("", ".REPETIDO6")) %>%
+  left_join(q5_3, by = "Id", suffix = c("", ".REPETIDO7")) %>%
+  left_join(q6, by = "Id", suffix = c("", ".REPETIDO8")) %>%
+  left_join(q6_1, by = "Id", suffix = c("", ".REPETIDO9")) %>%
+  left_join(q6_2, by = "Id", suffix = c("", ".REPETIDO0"))
+  
 
-q6_2 <- read_excel("Q6_ 2 Sanções.xlsx", sheet = 1)
+tb <- tb[,!grepl("REPETIDO", names(tb))]
 
+tb <- tb[, -c(12, 23)] # repetidos 
+
+head(tb)
+
+saveRDS(tb, file = "tabela")
+
+rm(q1, q2, q3, q4, q4_1, q5, q5_1, q5_2, q5_3, q6, q6_1, q6_2)
+```
+
+Ler dados já pronto
+```{r}
+tb <- readRDS("tabela")
 ```
 

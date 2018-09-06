@@ -181,110 +181,75 @@ $(document).ready(function () {
 <p>Bibliotecas Inserir aqui as bibliotecas necessárias (se não tiver no pc, instalar antes)</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShyZWFkeGwpXG5gYGAifQ== -->
-<pre class="r"><code>library(readxl)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShyZWFkeGwpXG5saWJyYXJ5KGRwbHlyKVxuYGBgIn0= -->
+<pre class="r"><code>library(readxl)
+library(dplyr)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Dados</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucTEgPC0gcmVhZF9leGNlbChcIlExXyBQZXJmaWwgZG9zIEVudHJldmlzdGFkb3MueGxzeFwiLCBzaGVldCA9IDEpXG5gYGAifQ== -->
-<pre class="r"><code>q1 &lt;- read_excel(&quot;Q1_ Perfil dos Entrevistados.xlsx&quot;, sheet = 1)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucTEgPC0gcmVhZF9leGNlbChcIlExXyBQZXJmaWwgZG9zIEVudHJldmlzdGFkb3MueGxzeFwiLCBzaGVldCA9IDEpXG5xMiA8LSByZWFkX2V4Y2VsKFwiUTJfIE5vbWUgdnVsZ2FyIGRhIE1hdGEgZSBTYWNyYWxpZGFkZS54bHN4XCIsIHNoZWV0ID0gMSkgIyBlbmdsb2JhIHRvdGFsbWVudGUgcTFcbnEzIDwtIHJlYWRfZXhjZWwoXCJRM18gUHJvcHJpZWRhZGUgZSBSZXNwb25zYWJpbGlkYWRlIHBlbGEgR2VzdMOjbyBkYSBNYXRhLnhsc3hcIiwgc2hlZXQgPSAxKVxucTQgPC0gcmVhZF9leGNlbChcIlE0XyBFc3RhZG8gZGUgY29uc2VydmHDp8OjbyBlIENyaXTDqXJpb3MueGxzeFwiLCBzaGVldCA9IDEpXG5xNF8xIDwtIHJlYWRfZXhjZWwoXCJRNF8xIEVzdGFkbyBkZSBDb25zZXJ2YcOnw6NvXyBSaXNjbyBkZSBkZXNhcGFyYWNpbWVudG8ueGxzeFwiLCBzaGVldCA9IDEpXG5xNSA8LSByZWFkX2V4Y2VsKFwiUTVfIFNlcnZpw6dvcyBFY29zc2lzdMOqbWljb3MueGxzeFwiLCBzaGVldCA9IDEpXG5xNV8xIDwtIHJlYWRfZXhjZWwoXCJRNV8xIFNlcnZpw6dvcyBFY29zc2lzdMOqbWljb3MgX1RlbmTDqm5jaWEgZGEgUXVhbGlkYWRlLnhsc3hcIiwgc2hlZXQgPSAxKVxucTVfMiA8LSByZWFkX2V4Y2VsKFwiUTVfMiBTZXJ2acOnb3MgRWNvc3Npc3TDqm1pY29zIFBvdGVuY2lhaXMgKEFuaW1haXMpLnhsc3hcIiwgc2hlZXQgPSAxKVxucTVfMyA8LSByZWFkX2V4Y2VsKFwiUTVfMyBTZXJ2acOnb3MgRWNvc3Npc3TDqm1pY29zIFBvdGVuY2lhaXMgKFBsYW50YXMpLnhsc3hcIiwgc2hlZXQgPSAxKVxucTYgPC0gcmVhZF9leGNlbChcIlE2XyAgQ29uaGVjaW1lbnRvIFNvYnJlIGFzIEluc3RpdHVpw6fDtWVzLnhsc3hcIiwgc2hlZXQgPSAxKVxucTZfMSA8LSByZWFkX2V4Y2VsKFwiUTZfIDEgRWZpY2nDqm5jaWEgZGFzIEluc3RpdHVpw6fDtWVzLnhsc3hcIiwgc2hlZXQgPSAxKVxucTZfMiA8LSByZWFkX2V4Y2VsKFwiUTZfIDIgU2Fuw6fDtWVzLnhsc3hcIiwgc2hlZXQgPSAxKVxuYGBgIn0= -->
+<pre class="r"><code>q1 &lt;- read_excel(&quot;Q1_ Perfil dos Entrevistados.xlsx&quot;, sheet = 1)
+q2 &lt;- read_excel(&quot;Q2_ Nome vulgar da Mata e Sacralidade.xlsx&quot;, sheet = 1) # engloba totalmente q1
+q3 &lt;- read_excel(&quot;Q3_ Propriedade e Responsabilidade pela Gestão da Mata.xlsx&quot;, sheet = 1)
+q4 &lt;- read_excel(&quot;Q4_ Estado de conservação e Critérios.xlsx&quot;, sheet = 1)
+q4_1 &lt;- read_excel(&quot;Q4_1 Estado de Conservação_ Risco de desaparacimento.xlsx&quot;, sheet = 1)
+q5 &lt;- read_excel(&quot;Q5_ Serviços Ecossistêmicos.xlsx&quot;, sheet = 1)
+q5_1 &lt;- read_excel(&quot;Q5_1 Serviços Ecossistêmicos _Tendência da Qualidade.xlsx&quot;, sheet = 1)
+q5_2 &lt;- read_excel(&quot;Q5_2 Serviços Ecossistêmicos Potenciais (Animais).xlsx&quot;, sheet = 1)
+q5_3 &lt;- read_excel(&quot;Q5_3 Serviços Ecossistêmicos Potenciais (Plantas).xlsx&quot;, sheet = 1)
+q6 &lt;- read_excel(&quot;Q6_  Conhecimento Sobre as Instituições.xlsx&quot;, sheet = 1)
+q6_1 &lt;- read_excel(&quot;Q6_ 1 Eficiência das Instituições.xlsx&quot;, sheet = 1)
+q6_2 &lt;- read_excel(&quot;Q6_ 2 Sanções.xlsx&quot;, sheet = 1)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Q2</p>
+<p>Junção de todos os dados em uma única tabela</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucTIgPC0gcmVhZF9leGNlbChcIlEyXyBOb21lIHZ1bGdhciBkYSBNYXRhIGUgU2FjcmFsaWRhZGUueGxzeFwiLCBzaGVldCA9IDEpXG5gYGAifQ== -->
-<pre class="r"><code>q2 &lt;- read_excel(&quot;Q2_ Nome vulgar da Mata e Sacralidade.xlsx&quot;, sheet = 1)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGIgPC0gcTIgJT4lIFxuICBsZWZ0X2pvaW4ocTMsIGJ5ID0gXCJJZFwiLCBzdWZmaXggPSBjKFwiXCIsIFwiLlJFUEVUSURPMVwiKSkgJT4lIFxuICBsZWZ0X2pvaW4ocTQsIGJ5ID0gXCJJZFwiLCBzdWZmaXggPSBjKFwiXCIsIFwiLlJFUEVUSURPMlwiKSkgJT4lXG4gIGxlZnRfam9pbihxNF8xLCBieSA9IFwiSWRcIiwgc3VmZml4ID0gYyhcIlwiLCBcIi5SRVBFVElETzNcIikpICU+JVxuICBsZWZ0X2pvaW4ocTUsIGJ5ID0gXCJJZFwiLCBzdWZmaXggPSBjKFwiXCIsIFwiLlJFUEVUSURPNFwiKSkgJT4lXG4gIGxlZnRfam9pbihxNV8xLCBieSA9IFwiSWRcIiwgc3VmZml4ID0gYyhcIlwiLCBcIi5SRVBFVElETzVcIikpICU+JVxuICBsZWZ0X2pvaW4ocTVfMiwgYnkgPSBcIklkXCIsIHN1ZmZpeCA9IGMoXCJcIiwgXCIuUkVQRVRJRE82XCIpKSAlPiVcbiAgbGVmdF9qb2luKHE1XzMsIGJ5ID0gXCJJZFwiLCBzdWZmaXggPSBjKFwiXCIsIFwiLlJFUEVUSURPN1wiKSkgJT4lXG4gIGxlZnRfam9pbihxNiwgYnkgPSBcIklkXCIsIHN1ZmZpeCA9IGMoXCJcIiwgXCIuUkVQRVRJRE84XCIpKSAlPiVcbiAgbGVmdF9qb2luKHE2XzEsIGJ5ID0gXCJJZFwiLCBzdWZmaXggPSBjKFwiXCIsIFwiLlJFUEVUSURPOVwiKSkgJT4lXG4gIGxlZnRfam9pbihxNl8yLCBieSA9IFwiSWRcIiwgc3VmZml4ID0gYyhcIlwiLCBcIi5SRVBFVElETzBcIikpXG4gIFxudGIgPC0gdGJbLCFncmVwbChcIlJFUEVUSURPXCIsIG5hbWVzKHRiKSldXG50YiA8LSB0YlssIC1jKDEyLCAyMyldICMgcmVwZXRpZG9zIFxuaGVhZCh0YilcbmBgYCJ9 -->
+<pre class="r"><code>tb &lt;- q2 %&gt;% 
+  left_join(q3, by = &quot;Id&quot;, suffix = c(&quot;&quot;, &quot;.REPETIDO1&quot;)) %&gt;% 
+  left_join(q4, by = &quot;Id&quot;, suffix = c(&quot;&quot;, &quot;.REPETIDO2&quot;)) %&gt;%
+  left_join(q4_1, by = &quot;Id&quot;, suffix = c(&quot;&quot;, &quot;.REPETIDO3&quot;)) %&gt;%
+  left_join(q5, by = &quot;Id&quot;, suffix = c(&quot;&quot;, &quot;.REPETIDO4&quot;)) %&gt;%
+  left_join(q5_1, by = &quot;Id&quot;, suffix = c(&quot;&quot;, &quot;.REPETIDO5&quot;)) %&gt;%
+  left_join(q5_2, by = &quot;Id&quot;, suffix = c(&quot;&quot;, &quot;.REPETIDO6&quot;)) %&gt;%
+  left_join(q5_3, by = &quot;Id&quot;, suffix = c(&quot;&quot;, &quot;.REPETIDO7&quot;)) %&gt;%
+  left_join(q6, by = &quot;Id&quot;, suffix = c(&quot;&quot;, &quot;.REPETIDO8&quot;)) %&gt;%
+  left_join(q6_1, by = &quot;Id&quot;, suffix = c(&quot;&quot;, &quot;.REPETIDO9&quot;)) %&gt;%
+  left_join(q6_2, by = &quot;Id&quot;, suffix = c(&quot;&quot;, &quot;.REPETIDO0&quot;))
+  
+tb &lt;- tb[,!grepl(&quot;REPETIDO&quot;, names(tb))]
+tb &lt;- tb[, -c(12, 23)] # repetidos 
+head(tb)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibmNvbCI6NTUsIm5yb3ciOjZ9LCJyZGYiOiJINHNJQUFBQUFBQUFBOVVaWFhNVVJYRHpSVWdRRFVwUlFxUVlRU0FwNWNnWHBId1FDQ0ZvTFBOQkRxcDRuYnVkdTB6Y25WbG1ka09LRi9IUmZ5SDZZRUZWcW56aFdjdjlReno3Z0hiUDd0emQ3bVV2ZDVHZ2JsVnVlM3Q2K211NmUzb21HM2Nlem93K0hIVWNwOThaR09weitnY0FIT3lIbno1bjBCbkI5NDdqREh3QXdEejhqY0hma1hSZ1lOR2Jib0l6VFhDMkNjNDF3V3ROOEhxTzA1a1ZHbEpTcG5WRlhVcGNSaFkzdVVjamp3bjJQNkxJMnRSMzF3SXJYV0R1d3MrN09Qdld2VnNPUHJlK2RwTDMrdS9KKzBINmZTZDlsNTg2NmRNcXRmLzZsSVhtcmpWd0RXaStBYzAyY1ZNNUhxUDNkNlJma2VJeFpZZUlzVEtkcHpoeU1mNkJlRkdkS3ZUcHN0aVdWUnIvRXY4czhaUHBJTjVWUEpRNkpUNEZ4RUw2akZBUjhycThHc2dnOHFqYVp6UlJZZnl1NUVSYVdkU1ZoRGJXOENDNmRFdWN6Wnd5OTF2QmhOWGdLc3dyb0dnbDdzaXFGekM3QktOZlJsUzVQSDdKOUdGaXVuREVDRG9Da3F6Q3VoN0xjbDJoa1FWdlM3OGRQTHZDaE5Ta0tvVm1hdHRrc2lTUEloTXlvR003RndSejZXM3JYZDkwTVREVEJOTDBkbkxQelZkNVROdGo1bG02L2VoYnhqUGFObFNhS2daYWFBcTA3ZUxwT0M5dlJZdTJoeUt2d3pQbS9QT2kyWlBzZ3BYcFgxM1lFMm92Q1hsc05udFRYRWM0eVIyTnVWTkltR0Y2Y2kwS0ZTVmJrUTU1amFlVkxSMGJMOU9xb2g2SEdncVZqc2lJQUNra2ViY2tlYVBPTEdDNWpoTGlDY1UwOTNqOFFsUTVuZXhLWXNhcjd6N1FFc3N2aCtvYlVlOE5ZQk1WVHF3eXNSbjVwQUw3ZlMzZXJYSlpSTDUzMmhhbGNUNFJ2alBmd3o5MSsrNVducVYvVS9LYzNwL012TjllWlFmejN5M1BXRHB2NUM5NGVuam41cGxsL09nTzk3bUllR09uM3VhYWh4amV5UloxQU5vaWViM3FtVS9VNWdaU01ESmRsTnl0aUNMdWg0TTRUR2xOcXd2S2FFdEwwUTF5UDhmUEZZN010dTJiMDRkcmVxR2ppeU5oL3hibDM5WDVnTjNyeUNyelNTaGRpZ240dGp1SC8vUzhIcnVNQkRxNXB0UERrb1lDVitPQ0s5cWVMbnRUOVNMbjNKS29LUXA5ZHBVcFdFRFl3RjJtb1FrUG9iN1N2VVR1TzZHWFhxcTBMS3BSb0xqUFJDaFRYdEJtQkF3T2FDVCtVUk11b00wSlRhVi8yVGdGSEh4K05xOU9ZQXBzeHMvZzZDSXNnUm40dElFZ0FmTW8rRGdLcFRKTmpvWXVSOHVLWW9LR2thSmNaOUtwbk0rdlRvaGpHeXhRakFtZGFmSXlHOTNiVVdTOGc1U2N5OGdxRi9Vb2Z1N0RsaXM5U3VnZUx1NXlkODFjYUExVlFhNFZacEdqTGcxcENhTE5aM2x5QVRoTFBtL0RZdGxOb2VFeTF5SHphZm81V0dZN3Rpa2NXa2F6VW11bXY0TEZuL0RCZVJnN1BoNUFKK0hNU1RHWVlINGc4VGk2Q1pGT0tQSHhrdWxteXVYOVZiek1xRW9mK2s0M0diTWo2MUtaWXl2VG1wazdEenZuMUFhejNGcWFaanM2dHBCSUFMRnc4Qld5TWV0ZUJCam9yQTNXQ3J1WkduQjFhUWN0UllFK3FXS2pUZ0pJUXF0dW1wWkdVOGlINTNiYTNDSiswMjNRZ1JMc2tVTzhkSEZaNC9TZE5sYVk1aDVMN2xMczNIUDNaVWc5UXd4OWRmeGNjYWc5NERyb3V3VndzV0U0dnlUcWRJc21pZWxTNHl0aGp3azF4UjVGeVVHaXZYdExRbkpqM3lvdy9BMzNBL2FFcGpQT0cxYzBtZXA0MTY5SUQ1VERYUTd2QnUwUjZIVDh2ZHFXVUNZK2c5ckp6ZW96RWorclIzWU5UOTZuUGhXYjZISlFsZGFORVRaKzhQaGxPWlZNL0VET3lPNkNKMDNxaGdkREhoaTNoeG43bXQ2azF0YVBGelRFa3ZJeE43Y2lsL3FHcHdpWklqWWcwdXFjaGhIR0pmZ2hrTUFkc3BoaVZFREJ0bVJIMHlpMTMxY1hKZGZBM055M2tKcUgzc0ZnVlBRSjZsZVJmaEpYT3FLd1dxNzErZVdNSmRxNEhjSUg3Tmd6SnQ0cGw4aTZrckRjemNQbU1jQXRSaDZXTUh1Zyt4QlE1U2lRS3NSWTJXRDF5TXVjY2k5MWtrcnhxSWNMMXFoMnQ2bUg1VTFhOTM4Q3RtUDBZVlNHVExqeEN4TXhVQkZidFV0b0wzU2d6V2s5MVlHMGt6V25GMHBrd1RNN1dKcDJFK0tQWDBrNW1MVGhzb0I2c1cwbWttRUdrcFVKOFRzU2NiQnMrU2xuWWNvRGpaNG5VQmZNOFJlQ3ZFR1VlUDdDRWxRbzNVd0JVMGw4VXBQSVBGdG15SHFKUkJyak1ha2txYjV0cWs0MjZVeTRlSEF5cDFoYXExUnRvKzc1Q1pkeUU1S1RPcGhZUlJQejFKODNxVVZTM0ZSa2ZSS0Z1Skh1ZWxpTjdEU1NOL2s4bUl5aUlDQkNlSGV3K09MRTlPUnlNeXRCQkJjMVRFQ1BYTUZGaFdUUzJpN2hqWW1aMHZRazZVUWZhVk5ORkFQREFNUzdsRkFsbE5hNkw0RExURWVoZVNhQmtyeVNaWEpqWXJhWVJRczk4Z2xVL0N6a1ZXb3lDS29KMjdJR1RVN01GWE1KYVNYQ2l1bTMzTGhmVGpZVTNlb0RyR1RvV2ovdFRHSFpHdDVkeU5mMGxGSkQzVlJRZ3JUbXZpVSttaWFXL2I2K2xwUXBYUCtrdXByZHI2QWZnVW9JSllzOXNiUEhsekFsd0doVGVCWGpVS1RjWk5ld3hYQndyYUpMdVlaalJNbkhKZHQwSE1kbTR5bjhRQi96Sjd4ZTU0aUhaUkJDNVFQU2Z2d2YzVkN1cmVsVE9jUjdrVURXN3BYcVppUyt2VEtIclk4WlRwN2pLWHlrQlo1UFJBN1lXNHFobE5VUkp1cTg4Wit4SVErYXZNYnRHWmhnTENoQnd5eEMyMk1CVnBkQ3JLZ1dVNVdleFJqYm5OZC9BMklpaGp1UkhBQUEifQ== -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Id"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Sistema"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Sexo"],"name":[3],"type":["chr"],"align":["left"]},{"label":["Idade"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Há (mais ou menos) quanto tempo conhece a mata ?"],"name":[5],"type":["chr"],"align":["left"]},{"label":["Nome comum da mata"],"name":[6],"type":["chr"],"align":["left"]},{"label":["Por que esse nome?"],"name":[7],"type":["chr"],"align":["left"]},{"label":["Reconhece Sacralidade?"],"name":[8],"type":["chr"],"align":["left"]},{"label":["A mata tem dono?"],"name":[9],"type":["chr"],"align":["left"]},{"label":["Quem e o dono da mata?"],"name":[10],"type":["chr"],"align":["left"]},{"label":["Existe quem cuida para a mata continue como é?"],"name":[11],"type":["chr"],"align":["left"]},{"label":["Como avalia o estado de conservação daquele lugar?"],"name":[12],"type":["chr"],"align":["left"]},{"label":["Total de critérios mencionados"],"name":[13],"type":["chr"],"align":["left"]},{"label":["Engajamento da comunidade e frequência de visitações"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["Respeito às instituições"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["Limpeza"],"name":[16],"type":["chr"],"align":["left"]},{"label":["Existência de símbolos o sagrado"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["Árvores, animais e água"],"name":[18],"type":["dbl"],"align":["right"]},{"label":["Tamanho do fragmento"],"name":[19],"type":["dbl"],"align":["right"]},{"label":["Outro"],"name":[20],"type":["dbl"],"align":["right"]},{"label":["Há (pelo menos) quanto tempo conhece a mata ?"],"name":[21],"type":["chr"],"align":["left"]},{"label":["Total de tipo de tnstituições mencionadas"],"name":[22],"type":["dbl"],"align":["right"]},{"label":["As normas ajudam a manter a mata?"],"name":[23],"type":["chr"],"align":["left"]},{"label":["A mata um dia pode desaparacer?"],"name":[24],"type":["chr"],"align":["left"]},{"label":["Por que?"],"name":[25],"type":["chr"],"align":["left"]},{"label":["Coisas que a floresta traz de bom para sua vida"],"name":[26],"type":["chr"],"align":["left"]},{"label":["Total de tipos de serviços mencionados"],"name":[27],"type":["dbl"],"align":["right"]},{"label":["S. Provisão"],"name":[28],"type":["dbl"],"align":["right"]},{"label":["S. Cultural"],"name":[29],"type":["dbl"],"align":["right"]},{"label":["S. Suporte e Regulação"],"name":[30],"type":["dbl"],"align":["right"]},{"label":["Total de tipos de serviços atualmente"],"name":[31],"type":["dbl"],"align":["right"]},{"label":["Balanço?"],"name":[32],"type":["dbl"],"align":["right"]},{"label":["Porquê da tendêcia do S. Provisão"],"name":[33],"type":["chr"],"align":["left"]},{"label":["Porquê da tendêcia do S. Cultural"],"name":[34],"type":["chr"],"align":["left"]},{"label":["Porquê da tendêcia do S. Suporte e Regulação"],"name":[35],"type":["chr"],"align":["left"]},{"label":["A. Alimentação (n° Sp)"],"name":[36],"type":["chr"],"align":["left"]},{"label":["A. Prevenção e Cura de Doenças  (n° Sp)"],"name":[37],"type":["chr"],"align":["left"]},{"label":["A. Usados em rituais (n° Sp)"],"name":[38],"type":["chr"],"align":["left"]},{"label":["Esses animais existem fora da mata?"],"name":[39],"type":["chr"],"align":["left"]},{"label":["P. usadas como Alimento (n° Sp)"],"name":[40],"type":["chr"],"align":["left"]},{"label":["P. usadas para lenha ou carvão  (n° Sp)"],"name":[41],"type":["chr"],"align":["left"]},{"label":["P. usadas para ritual e cura  (n° Sp)"],"name":[42],"type":["chr"],"align":["left"]},{"label":["P. usadas na contrução e utensílios (n° Sp)  (n° Sp)"],"name":[43],"type":["chr"],"align":["left"]},{"label":["Essas plantas xistem fora da mata?"],"name":[44],"type":["chr"],"align":["left"]},{"label":["(1)Instituição informal - do acesso"],"name":[45],"type":["dbl"],"align":["right"]},{"label":["(2.1) Instituição informal - do uso do recurso (restrição)"],"name":[46],"type":["dbl"],"align":["right"]},{"label":["(2.2)Instituição informal - do uso do recurso (proibição)"],"name":[47],"type":["dbl"],"align":["right"]},{"label":["(3)Instituição informal - proibição do práticas de manejo"],"name":[48],"type":["dbl"],"align":["right"]},{"label":["(4)Instituição informal - tabus e mitos"],"name":[49],"type":["dbl"],"align":["right"]},{"label":["Como as Instituições foram definidas?"],"name":[50],"type":["chr"],"align":["left"]},{"label":["As instituições foram sempre assim?"],"name":[51],"type":["chr"],"align":["left"]},{"label":["Porquê?"],"name":[52],"type":["chr"],"align":["left"]},{"label":["O que acontece a quem viola as instituições uma vez?"],"name":[53],"type":["chr"],"align":["left"]},{"label":["E em caso de reincidência?"],"name":[54],"type":["chr"],"align":["left"]},{"label":["Obs."],"name":[55],"type":["chr"],"align":["left"]}],"data":[{"1":"Cl1","2":"Mata Sagrada de Chilaulene","3":"F","4":"69","5":"60","6":"Txombonwae","7":"É lugar de Invocação de espíritos","8":"Sim","9":"Sim","10":"Guardiões","11":"Sim","12":"Mau","13":"2","14":"0","15":"1","16":"1","17":"0","18":"0","19":"0","20":"0","21":"60","22":"0","23":"__NA__","24":"Não","25":"Outra justificação","26":"Uso espiritual","27":"1","28":"NA","29":"1","30":"NA","31":"0","32":"0","33":"NA","34":"NA","35":"NA","36":"Não sabe","37":"Não sabe","38":"Não sabe","39":"__NA__","40":"Não sabe","41":"Não sabe","42":"1","43":"Não sabe","44":"Sim","45":"0","46":"0","47":"0","48":"0","49":"0","50":"__NA__","51":"__NA__","52":"__NA__","53":"Nãohá Sanções","54":"NA","55":"Ninguém viola as instituições"},{"1":"Cl2","2":"Mata Sagrada de Chilaulene","3":"M","4":"52","5":"45","6":"Txombonwae","7":"É nome antigo/popular","8":"Sim","9":"Sim","10":"Guardiões","11":"Sim","12":"Bom","13":"1","14":"0","15":"1","16":"0","17":"0","18":"0","19":"0","20":"0","21":"45","22":"0","23":"__NA__","24":"Não","25":"Sacralidade e ou tradição","26":"Uso espiritual","27":"1","28":"NA","29":"1","30":"NA","31":"0","32":"-1","33":"NA","34":"Diminuição de visitações","35":"NA","36":"2","37":"Não sabe","38":"Não sabe","39":"Sim","40":"4","41":"Não sabe","42":"Não sabe","43":"Não sabe","44":"Sim","45":"0","46":"0","47":"0","48":"0","49":"0","50":"__NA__","51":"__NA__","52":"__NA__","53":"Sanções pelas autoridades e sobrenaturais","54":"Sanções pelas autoridades e sobrenaturais","55":"NA"},{"1":"Cl3","2":"Mata Sagrada de Chilaulene","3":"F","4":"67","5":"65","6":"Txombonwae","7":"É nome antigo/popular","8":"Não","9":"Sim","10":"Guardiões","11":"Não Sabe","12":"Bom","13":"1","14":"1","15":"0","16":"0","17":"0","18":"0","19":"0","20":"0","21":"65","22":"0","23":"__NA__","24":"Não","25":"Sacralidade e ou tradição","26":"Uso espiritual","27":"1","28":"NA","29":"1","30":"NA","31":"0","32":"0","33":"NA","34":"NA","35":"NA","36":"Não sabe","37":"Não sabe","38":"Não sabe","39":"__NA__","40":"Não sabe","41":"Não sabe","42":"1","43":"Não sabe","44":"Sim","45":"0","46":"0","47":"0","48":"0","49":"0","50":"__NA__","51":"__NA__","52":"__NA__","53":"Não Sabe","54":"Não Sabe","55":"NA"},{"1":"Cl4","2":"Mata Sagrada de Chilaulene","3":"M","4":"84","5":"75","6":"Txombonwae","7":"Foi o lugar dado a Chilaule","8":"Sim","9":"Sim","10":"Guardiões","11":"Sim","12":"Menos conservada do que antes","13":"1","14":"0","15":"0","16":"0","17":"0","18":"1","19":"0","20":"0","21":"75","22":"0","23":"Não","24":"Não sabe","25":"__NA__","26":"Uso espiritual","27":"1","28":"NA","29":"1","30":"NA","31":"0","32":"-1","33":"NA","34":"Diminuição de visitações","35":"NA","36":"1","37":"Não sabe","38":"Não sabe","39":"Sim","40":"3","41":"Não sabe","42":"1","43":"Não sabe","44":"Sim","45":"0","46":"0","47":"0","48":"0","49":"0","50":"Os antigos definiram","51":"Enfraquecerem ou descontinuaram","52":"Incuprimento ou desrespeito às instituições","53":"Não Sabe","54":"Não Sabe","55":"NA"},{"1":"Cl5","2":"Mata Sagrada de Chilaulene","3":"F","4":"40","5":"35","6":"Txombonwae","7":"É lugar de Invocação de espíritos","8":"Sim","9":"Sim","10":"Guardiões","11":"Não Sabe","12":"Mau","13":"2","14":"0","15":"0","16":"1","17":"0","18":"1","19":"0","20":"0","21":"35","22":"0","23":"__NA__","24":"Não","25":"Antiguidade (resiliência)","26":"Nenhum benefício","27":"0","28":"NA","29":"NA","30":"NA","31":"0","32":"0","33":"NA","34":"NA","35":"NA","36":"Não sabe","37":"Não sabe","38":"Não sabe","39":"__NA__","40":"1","41":"Não sabe","42":"1","43":"Não sabe","44":"Sim","45":"0","46":"0","47":"0","48":"0","49":"0","50":"__NA__","51":"__NA__","52":"__NA__","53":"Não Sabe","54":"Não Sabe","55":"NA"},{"1":"Cl6","2":"Mata Sagrada de Chilaulene","3":"F","4":"78","5":"70","6":"Txombonwae","7":"É lugar de Invocação de espíritos","8":"Sim","9":"Sim","10":"Guardiões","11":"Sim","12":"Mau","13":"2","14":"0","15":"1","16":"0","17":"0","18":"1","19":"0","20":"0","21":"70","22":"1","23":"Não","24":"Não","25":"Sacralidade e ou tradição","26":"Uso espiritual","27":"1","28":"NA","29":"1","30":"NA","31":"0","32":"0","33":"NA","34":"NA","35":"NA","36":"Não sabe","37":"Não sabe","38":"1","39":"Sim","40":"1","41":"Não sabe","42":"1","43":"Não sabe","44":"Nem todas","45":"0","46":"0","47":"0","48":"0","49":"1","50":"Os antigos definiram","51":"Enfraquecerem ou descontinuaram","52":"Incuprimento ou desrespeito às instituições","53":"Repreensão","54":"Sanções pelas autoridades","55":"NA"}],"options":{"columns":{"min":{},"max":[10],"total":[55]},"rows":{"min":[10],"max":[10],"total":[6]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2F2ZVJEUyh0YiwgZmlsZSA9IFwidGFiZWxhXCIpXG5ybShxMSwgcTIsIHEzLCBxNCwgcTRfMSwgcTUsIHE1XzEsIHE1XzIsIHE1XzMsIHE2LCBxNl8xLCBxNl8yKVxuYGBgIn0= -->
+<pre class="r"><code>saveRDS(tb, file = &quot;tabela&quot;)
+rm(q1, q2, q3, q4, q4_1, q5, q5_1, q5_2, q5_3, q6, q6_1, q6_2)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Q3</p>
+<p>Ler dados já pronto</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucTMgPC0gcmVhZF9leGNlbChcIlEzXyBQcm9wcmllZGFkZSBlIFJlc3BvbnNhYmlsaWRhZGUgcGVsYSBHZXN0w6NvIGRhIE1hdGEueGxzeFwiLCBzaGVldCA9IDEpXG5gYGAifQ== -->
-<pre class="r"><code>q3 &lt;- read_excel(&quot;Q3_ Propriedade e Responsabilidade pela Gestão da Mata.xlsx&quot;, sheet = 1)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>Q4</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucTQgPC0gcmVhZF9leGNlbChcIlE0XyBFc3RhZG8gZGUgY29uc2VydmHDp8OjbyBlIENyaXTDqXJpb3MueGxzeFwiLCBzaGVldCA9IDEpXG5gYGAifQ== -->
-<pre class="r"><code>q4 &lt;- read_excel(&quot;Q4_ Estado de conservação e Critérios.xlsx&quot;, sheet = 1)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>Q4_1</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucTRfMSA8LSByZWFkX2V4Y2VsKFwiUTRfMSBFc3RhZG8gZGUgQ29uc2VydmHDp8Ojb18gUmlzY28gZGUgZGVzYXBhcmFjaW1lbnRvLnhsc3hcIiwgc2hlZXQgPSAxKVxuYGBgIn0= -->
-<pre class="r"><code>q4_1 &lt;- read_excel(&quot;Q4_1 Estado de Conservação_ Risco de desaparacimento.xlsx&quot;, sheet = 1)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>Q5</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucTUgPC0gcmVhZF9leGNlbChcIlE1XyBTZXJ2acOnb3MgRWNvc3Npc3TDqm1pY29zLnhsc3hcIiwgc2hlZXQgPSAxKVxuYGBgIn0= -->
-<pre class="r"><code>q5 &lt;- read_excel(&quot;Q5_ Serviços Ecossistêmicos.xlsx&quot;, sheet = 1)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>Q5_1</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucTVfMSA8LSByZWFkX2V4Y2VsKFwiUTVfMSBTZXJ2acOnb3MgRWNvc3Npc3TDqm1pY29zIF9UZW5kw6puY2lhIGRhIFF1YWxpZGFkZS54bHN4XCIsIHNoZWV0ID0gMSlcbmBgYCJ9 -->
-<pre class="r"><code>q5_1 &lt;- read_excel(&quot;Q5_1 Serviços Ecossistêmicos _Tendência da Qualidade.xlsx&quot;, sheet = 1)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>Q5_2</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucTVfMiA8LSByZWFkX2V4Y2VsKFwiUTVfMiBTZXJ2acOnb3MgRWNvc3Npc3TDqm1pY29zIFBvdGVuY2lhaXMgKEFuaW1haXMpLnhsc3hcIiwgc2hlZXQgPSAxKVxuYGBgIn0= -->
-<pre class="r"><code>q5_2 &lt;- read_excel(&quot;Q5_2 Serviços Ecossistêmicos Potenciais (Animais).xlsx&quot;, sheet = 1)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>Q5_3</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucTVfMyA8LSByZWFkX2V4Y2VsKFwiUTVfMyBTZXJ2acOnb3MgRWNvc3Npc3TDqm1pY29zIFBvdGVuY2lhaXMgKFBsYW50YXMpLnhsc3hcIiwgc2hlZXQgPSAxKVxuYGBgIn0= -->
-<pre class="r"><code>q5_3 &lt;- read_excel(&quot;Q5_3 Serviços Ecossistêmicos Potenciais (Plantas).xlsx&quot;, sheet = 1)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>Q6</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucTYgPC0gcmVhZF9leGNlbChcIlE2XyAgQ29uaGVjaW1lbnRvIFNvYnJlIGFzIEluc3RpdHVpw6fDtWVzLnhsc3hcIiwgc2hlZXQgPSAxKVxuYGBgIn0= -->
-<pre class="r"><code>q6 &lt;- read_excel(&quot;Q6_  Conhecimento Sobre as Instituições.xlsx&quot;, sheet = 1)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>Q6_1</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucTZfMSA8LSByZWFkX2V4Y2VsKFwiUTZfIDEgRWZpY2nDqm5jaWEgZGFzIEluc3RpdHVpw6fDtWVzLnhsc3hcIiwgc2hlZXQgPSAxKVxuYGBgIn0= -->
-<pre class="r"><code>q6_1 &lt;- read_excel(&quot;Q6_ 1 Eficiência das Instituições.xlsx&quot;, sheet = 1)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>Q6_2</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucTZfMiA8LSByZWFkX2V4Y2VsKFwiUTZfIDIgU2Fuw6fDtWVzLnhsc3hcIiwgc2hlZXQgPSAxKVxuYGBgIn0= -->
-<pre class="r"><code>q6_2 &lt;- read_excel(&quot;Q6_ 2 Sanções.xlsx&quot;, sheet = 1)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGIgPC0gcmVhZFJEUyhcInRhYmVsYVwiKVxuYGBgIn0= -->
+<pre class="r"><code>tb &lt;- readRDS(&quot;tabela&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUHJvamV0byBNRTgxMiIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKRXN0dWRvIHF1YWxpdGF0aXZvLXF1YW50aXRhdGl2byBkZSBmbG9yZXN0YXMgc2FncmFkYXMgZW0gTW/Dp2FtYmlxdWUKCkxlbWJyZXRlOiBTZSBjZXJ0aWZpY2FyIHF1ZSBlc3TDoSBuYSBwYXN0YSBjb3JyZXRhLCBxdWUgY29udMOpbSBvcyBkYWRvcyBjb20gZ2V0d2QoKSBlIG5hIGhvcmEgZGUgc2FsdmFyIHVzYXIgVVRGLTgKCkJpYmxpb3RlY2FzCkluc2VyaXIgYXF1aSBhcyBiaWJsaW90ZWNhcyBuZWNlc3PDoXJpYXMgKHNlIG7Do28gdGl2ZXIgbm8gcGMsIGluc3RhbGFyIGFudGVzKQpgYGB7cn0KbGlicmFyeShyZWFkeGwpCmBgYAoKCkRhZG9zCgpgYGB7cn0KCnExIDwtIHJlYWRfZXhjZWwoIlExXyBQZXJmaWwgZG9zIEVudHJldmlzdGFkb3MueGxzeCIsIHNoZWV0ID0gMSkKCmBgYAoKUTIKYGBge3J9CgpxMiA8LSByZWFkX2V4Y2VsKCJRMl8gTm9tZSB2dWxnYXIgZGEgTWF0YSBlIFNhY3JhbGlkYWRlLnhsc3giLCBzaGVldCA9IDEpCgpgYGAKClEzCmBgYHtyfQoKcTMgPC0gcmVhZF9leGNlbCgiUTNfIFByb3ByaWVkYWRlIGUgUmVzcG9uc2FiaWxpZGFkZSBwZWxhIEdlc3TDo28gZGEgTWF0YS54bHN4Iiwgc2hlZXQgPSAxKQoKYGBgCgpRNApgYGB7cn0KCnE0IDwtIHJlYWRfZXhjZWwoIlE0XyBFc3RhZG8gZGUgY29uc2VydmHDp8OjbyBlIENyaXTDqXJpb3MueGxzeCIsIHNoZWV0ID0gMSkKCmBgYAoKUTRfMQpgYGB7cn0KCnE0XzEgPC0gcmVhZF9leGNlbCgiUTRfMSBFc3RhZG8gZGUgQ29uc2VydmHDp8Ojb18gUmlzY28gZGUgZGVzYXBhcmFjaW1lbnRvLnhsc3giLCBzaGVldCA9IDEpCgpgYGAKClE1CmBgYHtyfQoKcTUgPC0gcmVhZF9leGNlbCgiUTVfIFNlcnZpw6dvcyBFY29zc2lzdMOqbWljb3MueGxzeCIsIHNoZWV0ID0gMSkKCmBgYAoKUTVfMQpgYGB7cn0KCnE1XzEgPC0gcmVhZF9leGNlbCgiUTVfMSBTZXJ2acOnb3MgRWNvc3Npc3TDqm1pY29zIF9UZW5kw6puY2lhIGRhIFF1YWxpZGFkZS54bHN4Iiwgc2hlZXQgPSAxKQoKYGBgCgpRNV8yCmBgYHtyfQoKcTVfMiA8LSByZWFkX2V4Y2VsKCJRNV8yIFNlcnZpw6dvcyBFY29zc2lzdMOqbWljb3MgUG90ZW5jaWFpcyAoQW5pbWFpcykueGxzeCIsIHNoZWV0ID0gMSkKCmBgYAoKUTVfMwpgYGB7cn0KCnE1XzMgPC0gcmVhZF9leGNlbCgiUTVfMyBTZXJ2acOnb3MgRWNvc3Npc3TDqm1pY29zIFBvdGVuY2lhaXMgKFBsYW50YXMpLnhsc3giLCBzaGVldCA9IDEpCgpgYGAKClE2CmBgYHtyfQoKcTYgPC0gcmVhZF9leGNlbCgiUTZfICBDb25oZWNpbWVudG8gU29icmUgYXMgSW5zdGl0dWnDp8O1ZXMueGxzeCIsIHNoZWV0ID0gMSkKCmBgYAoKUTZfMQpgYGB7cn0KCnE2XzEgPC0gcmVhZF9leGNlbCgiUTZfIDEgRWZpY2nDqm5jaWEgZGFzIEluc3RpdHVpw6fDtWVzLnhsc3giLCBzaGVldCA9IDEpCgpgYGAKClE2XzIKYGBge3J9CgpxNl8yIDwtIHJlYWRfZXhjZWwoIlE2XyAyIFNhbsOnw7Vlcy54bHN4Iiwgc2hlZXQgPSAxKQoKYGBgCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUHJvamV0byBNRTgxMiIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKRXN0dWRvIHF1YWxpdGF0aXZvLXF1YW50aXRhdGl2byBkZSBmbG9yZXN0YXMgc2FncmFkYXMgZW0gTW/Dp2FtYmlxdWUKCkxlbWJyZXRlOiBTZSBjZXJ0aWZpY2FyIHF1ZSBlc3TDoSBuYSBwYXN0YSBjb3JyZXRhLCBxdWUgY29udMOpbSBvcyBkYWRvcyBjb20gZ2V0d2QoKSBlIG5hIGhvcmEgZGUgc2FsdmFyIHVzYXIgVVRGLTgKCkJpYmxpb3RlY2FzCkluc2VyaXIgYXF1aSBhcyBiaWJsaW90ZWNhcyBuZWNlc3PDoXJpYXMgKHNlIG7Do28gdGl2ZXIgbm8gcGMsIGluc3RhbGFyIGFudGVzKQpgYGB7cn0KbGlicmFyeShyZWFkeGwpCmxpYnJhcnkoZHBseXIpCmBgYAoKRGFkb3MKCmBgYHtyfQpxMSA8LSByZWFkX2V4Y2VsKCJRMV8gUGVyZmlsIGRvcyBFbnRyZXZpc3RhZG9zLnhsc3giLCBzaGVldCA9IDEpCnEyIDwtIHJlYWRfZXhjZWwoIlEyXyBOb21lIHZ1bGdhciBkYSBNYXRhIGUgU2FjcmFsaWRhZGUueGxzeCIsIHNoZWV0ID0gMSkgIyBlbmdsb2JhIHRvdGFsbWVudGUgcTEKcTMgPC0gcmVhZF9leGNlbCgiUTNfIFByb3ByaWVkYWRlIGUgUmVzcG9uc2FiaWxpZGFkZSBwZWxhIEdlc3TDo28gZGEgTWF0YS54bHN4Iiwgc2hlZXQgPSAxKQpxNCA8LSByZWFkX2V4Y2VsKCJRNF8gRXN0YWRvIGRlIGNvbnNlcnZhw6fDo28gZSBDcml0w6lyaW9zLnhsc3giLCBzaGVldCA9IDEpCnE0XzEgPC0gcmVhZF9leGNlbCgiUTRfMSBFc3RhZG8gZGUgQ29uc2VydmHDp8Ojb18gUmlzY28gZGUgZGVzYXBhcmFjaW1lbnRvLnhsc3giLCBzaGVldCA9IDEpCnE1IDwtIHJlYWRfZXhjZWwoIlE1XyBTZXJ2acOnb3MgRWNvc3Npc3TDqm1pY29zLnhsc3giLCBzaGVldCA9IDEpCnE1XzEgPC0gcmVhZF9leGNlbCgiUTVfMSBTZXJ2acOnb3MgRWNvc3Npc3TDqm1pY29zIF9UZW5kw6puY2lhIGRhIFF1YWxpZGFkZS54bHN4Iiwgc2hlZXQgPSAxKQpxNV8yIDwtIHJlYWRfZXhjZWwoIlE1XzIgU2VydmnDp29zIEVjb3NzaXN0w6ptaWNvcyBQb3RlbmNpYWlzIChBbmltYWlzKS54bHN4Iiwgc2hlZXQgPSAxKQpxNV8zIDwtIHJlYWRfZXhjZWwoIlE1XzMgU2VydmnDp29zIEVjb3NzaXN0w6ptaWNvcyBQb3RlbmNpYWlzIChQbGFudGFzKS54bHN4Iiwgc2hlZXQgPSAxKQpxNiA8LSByZWFkX2V4Y2VsKCJRNl8gIENvbmhlY2ltZW50byBTb2JyZSBhcyBJbnN0aXR1acOnw7Vlcy54bHN4Iiwgc2hlZXQgPSAxKQpxNl8xIDwtIHJlYWRfZXhjZWwoIlE2XyAxIEVmaWNpw6puY2lhIGRhcyBJbnN0aXR1acOnw7Vlcy54bHN4Iiwgc2hlZXQgPSAxKQpxNl8yIDwtIHJlYWRfZXhjZWwoIlE2XyAyIFNhbsOnw7Vlcy54bHN4Iiwgc2hlZXQgPSAxKQpgYGAKCkp1bsOnw6NvIGRlIHRvZG9zIG9zIGRhZG9zIGVtIHVtYSDDum5pY2EgdGFiZWxhCgpgYGB7cn0KdGIgPC0gcTIgJT4lIAogIGxlZnRfam9pbihxMywgYnkgPSAiSWQiLCBzdWZmaXggPSBjKCIiLCAiLlJFUEVUSURPMSIpKSAlPiUgCiAgbGVmdF9qb2luKHE0LCBieSA9ICJJZCIsIHN1ZmZpeCA9IGMoIiIsICIuUkVQRVRJRE8yIikpICU+JQogIGxlZnRfam9pbihxNF8xLCBieSA9ICJJZCIsIHN1ZmZpeCA9IGMoIiIsICIuUkVQRVRJRE8zIikpICU+JQogIGxlZnRfam9pbihxNSwgYnkgPSAiSWQiLCBzdWZmaXggPSBjKCIiLCAiLlJFUEVUSURPNCIpKSAlPiUKICBsZWZ0X2pvaW4ocTVfMSwgYnkgPSAiSWQiLCBzdWZmaXggPSBjKCIiLCAiLlJFUEVUSURPNSIpKSAlPiUKICBsZWZ0X2pvaW4ocTVfMiwgYnkgPSAiSWQiLCBzdWZmaXggPSBjKCIiLCAiLlJFUEVUSURPNiIpKSAlPiUKICBsZWZ0X2pvaW4ocTVfMywgYnkgPSAiSWQiLCBzdWZmaXggPSBjKCIiLCAiLlJFUEVUSURPNyIpKSAlPiUKICBsZWZ0X2pvaW4ocTYsIGJ5ID0gIklkIiwgc3VmZml4ID0gYygiIiwgIi5SRVBFVElETzgiKSkgJT4lCiAgbGVmdF9qb2luKHE2XzEsIGJ5ID0gIklkIiwgc3VmZml4ID0gYygiIiwgIi5SRVBFVElETzkiKSkgJT4lCiAgbGVmdF9qb2luKHE2XzIsIGJ5ID0gIklkIiwgc3VmZml4ID0gYygiIiwgIi5SRVBFVElETzAiKSkKICAKCnRiIDwtIHRiWywhZ3JlcGwoIlJFUEVUSURPIiwgbmFtZXModGIpKV0KCnRiIDwtIHRiWywgLWMoMTIsIDIzKV0gIyByZXBldGlkb3MgCgpoZWFkKHRiKQoKc2F2ZVJEUyh0YiwgZmlsZSA9ICJ0YWJlbGEiKQoKcm0ocTEsIHEyLCBxMywgcTQsIHE0XzEsIHE1LCBxNV8xLCBxNV8yLCBxNV8zLCBxNiwgcTZfMSwgcTZfMikKYGBgCgpMZXIgZGFkb3MgasOhIHByb250bwpgYGB7cn0KdGIgPC0gcmVhZFJEUygidGFiZWxhIikKYGBgCgo=</div>
 
 
 
