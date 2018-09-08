@@ -13,6 +13,7 @@ Inserir aqui as bibliotecas necessárias (se não tiver no pc, instalar antes)
 library(readxl)
 library(dplyr)
 library(ggplot2)
+library(ggpubr)
 ```
 
 ```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
@@ -85,9 +86,9 @@ tb$Ocupação <- as.factor(tb$Ocupação)
 # }
 ```
 
-Perfil dos entrevistados
+#Perfil dos entrevistados
 
-Sexo
+##*Sexo*
 ```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
 ggplot(tb, aes(Sexo, fill = Sexo)) +
   geom_histogram(stat="count") +
@@ -100,8 +101,43 @@ ggplot(tb, aes(Sexo, fill = Sexo)) +
   ggtitle("Sexo dos entrevistados")
 ```
 
+##*Dividido por Sistemas*
+```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+g1 <- ggplot(subset(tb, tb$Sistema==levels(tb$Sistema)[1]), aes(Sexo, fill = Sexo)) +
+  geom_histogram(stat="count") +
+  ylab("Frequência") +
+  scale_fill_manual(labels = c("Feminino", "Masculino"), 
+                    values=c( "#FFA8A8", "#86BCFF", "#72FE95", "#FFFF84", "#FFB347")) +
+  theme(legend.position = "none") +
+  geom_text(stat="count", aes(label=paste0(round(..count../nrow(subset(tb, tb$Sistema==levels(tb$Sistema)[1]))*100,2),"%")), position=position_dodge(width=0.9), vjust=-0.25) +
+  ylim(0, 60) +
+  ggtitle(levels(tb$Sistema)[1])
 
-Idade
+g2 <- ggplot(subset(tb, tb$Sistema==levels(tb$Sistema)[2]), aes(Sexo, fill = Sexo)) +
+  geom_histogram(stat="count") +
+  ylab("Frequência") +
+  scale_fill_manual(labels = c("Feminino", "Masculino"), 
+                    values=c( "#FFA8A8", "#86BCFF", "#72FE95", "#FFFF84", "#FFB347")) +
+  theme(legend.position = "none") +
+  geom_text(stat="count", aes(label=paste0(round(..count../nrow(subset(tb, tb$Sistema==levels(tb$Sistema)[2]))*100,2),"%")), position=position_dodge(width=0.9), vjust=-0.25) +
+  ylim(0, 40) +
+  ggtitle(levels(tb$Sistema)[2])
+
+g3 <- ggplot(subset(tb, tb$Sistema==levels(tb$Sistema)[3]), aes(Sexo, fill = Sexo)) +
+  geom_histogram(stat="count") +
+  ylab("Frequência") +
+  scale_fill_manual(labels = c("Feminino", "Masculino"), 
+                    values=c( "#FFA8A8", "#86BCFF", "#72FE95", "#FFFF84", "#FFB347")) +
+  theme(legend.position = "bottom") +
+  geom_text(stat="count", aes(label=paste0(round(..count../nrow(subset(tb, tb$Sistema==levels(tb$Sistema)[3]))*100,2),"%")), position=position_dodge(width=0.9), vjust=-0.25) +
+  ylim(0, 50) +
+  ggtitle(levels(tb$Sistema)[3])
+
+ggarrange(g1, g2, g3, nrow = 3, ncol = 1, heights = c(1, 1, 1.4))
+
+```
+
+##*Idade*
 Faixa 1: 18-30;
 Faixa 2: 30-50;
 Faixa 3: 50 +
@@ -136,7 +172,42 @@ ggplot(tb, aes(FaixaIdade, fill = FaixaIdade)) +
   ggtitle("Idade dos entrevistados")
 ```
 
-Ocupação
+##*Dividido por Sistemas*
+```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+g1 <- ggplot(subset(tb, tb$Sistema==levels(tb$Sistema)[1]), aes(FaixaIdade, fill = FaixaIdade)) +
+  geom_histogram(stat="count") +
+  ylab("Frequência") +
+  scale_fill_manual(labels = c("18-30", "31-54", "55 ou mais"), 
+                    values=c( "#FFA8A8", "#D97BFD", "#86BCFF", "#72FE95", "#FFFF84", "#FFB347")) +
+  theme(legend.position = "none") +
+  geom_text(stat="count", aes(label=paste0(round(..count../nrow(subset(tb, tb$Sistema==levels(tb$Sistema)[1]))*100,2),"%")), position=position_dodge(width=0.9), vjust=-0.25) +
+  ylim(0, 60) +
+  ggtitle(levels(tb$Sistema)[1])
+
+g2 <- ggplot(subset(tb, tb$Sistema==levels(tb$Sistema)[2]), aes(FaixaIdade, fill = FaixaIdade)) +
+  geom_histogram(stat="count") +
+  ylab("Frequência") +
+  scale_fill_manual(labels = c("18-30", "31-54", "55 ou mais"), 
+                    values=c( "#FFA8A8", "#D97BFD", "#86BCFF", "#72FE95", "#FFFF84", "#FFB347")) +
+  theme(legend.position = "none") +
+  geom_text(stat="count", aes(label=paste0(round(..count../nrow(subset(tb, tb$Sistema==levels(tb$Sistema)[2]))*100,2),"%")), position=position_dodge(width=0.9), vjust=-0.25) +
+  ylim(0, 30) +
+  ggtitle(levels(tb$Sistema)[2])
+
+g3 <- ggplot(subset(tb, tb$Sistema==levels(tb$Sistema)[3]), aes(FaixaIdade, fill = FaixaIdade)) +
+  geom_histogram(stat="count") +
+  ylab("Frequência") +
+  scale_fill_manual(labels = c("18-30", "31-54", "55 ou mais"), 
+                    values=c( "#FFA8A8", "#D97BFD", "#86BCFF", "#72FE95", "#FFFF84", "#FFB347")) +
+  theme(legend.position = "bottom") +
+  geom_text(stat="count", aes(label=paste0(round(..count../nrow(subset(tb, tb$Sistema==levels(tb$Sistema)[3]))*100,2),"%")), position=position_dodge(width=0.9), vjust=-0.25) +
+  ylim(0, 40) +
+  ggtitle(levels(tb$Sistema)[3])
+
+ggarrange(g1, g2, g3, nrow = 3, ncol = 1, heights = c(1, 1, 1.4))
+```
+
+##*Ocupação*
 ```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
 positions <- c("Agricultura\nfamiliar","Outra","Agricultura","Agricultora","Aposentado","Desempregado","Extrativismo","Medicina\ntradicional","Funcionario do\nSector Privado","Autoridade\ntradicional","Estudante","Funcionario\npúblico","Pesca\nartesanal","Terceiro\nsector","LiderançaComunitária")
 
@@ -155,8 +226,8 @@ ggplot(tb, aes(Ocupação, fill = Ocupação)) +
   ggtitle("Ocupação dos entrevistados")
 ```
 
-Estado de conservação
-```{r}
+##*Estado de conservação*
+```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
 
 conservacao <- tb[1,c(15:21)]
 conservacao$`Engajamento da comunidade e frequência de visitações` <- sum(as.numeric(tb$`Engajamento da comunidade e frequência de visitações`), na.rm = TRUE)
