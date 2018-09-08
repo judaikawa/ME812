@@ -8,5 +8,7 @@ Dar upload no arquivo R trabalhado, de preferência código comentado. Cada pess
 
 Arquivos do estudo também no [Google Drive](https://drive.google.com/drive/u/0/folders/1WeoVYm64YKVonDUzc66IJgxL6QbUret8?ogsrc=32).
 
+Para ler a tabela (junção de todos os dados do estudo), rodar o comando readRDS("tabela").
+
 Datas importantes:
 - 14/09: Entrega do plano de estudo
