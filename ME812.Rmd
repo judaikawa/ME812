@@ -209,7 +209,7 @@ ggarrange(g1, g2, g3, nrow = 3, ncol = 1, heights = c(1, 1, 1.4))
 
 ##*Ocupação*
 ```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
-positions <- c("Agricultura\nfamiliar","Outra","Agricultura","Agricultora","Aposentado","Desempregado","Extrativismo","Medicina\ntradicional","Funcionario do\nSector Privado","Autoridade\ntradicional","Estudante","Funcionario\npúblico","Pesca\nartesanal","Terceiro\nsector","LiderançaComunitária")
+positions <- c("Agricultura\nfamiliar","Outra","Agricultura","Agricultora","Aposentado","Desempregado","Extrativismo","Medicina\ntradicional","Funcionario do\nSector Privado","Autoridade\ntradicional","Estudante","Funcionario\npúblico","Pesca\nartesanal","Terceiro\nsector","Liderança\nComunitária")
 
 levels(tb$Ocupação) <- gsub(" ", "\n", levels(tb$Ocupação))
 levels(tb$Ocupação)[9] <- "Funcionario do\nSector Privado"
@@ -229,7 +229,7 @@ ggplot(tb, aes(Ocupação, fill = Ocupação)) +
 ##*Estado de conservação*
 ```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
 
-conservacao <- tb[1,c(15:21)]
+conservacao <- tb[1,c(16:22)]
 conservacao$`Engajamento da comunidade e frequência de visitações` <- sum(as.numeric(tb$`Engajamento da comunidade e frequência de visitações`), na.rm = TRUE)
 conservacao$`Respeito às instituições` <- sum(as.numeric(tb$`Respeito às instituições`), na.rm = TRUE)
 conservacao$Limpeza <- sum(as.numeric(tb$Limpeza), na.rm = TRUE)
@@ -242,7 +242,7 @@ conservacao <- as.data.frame(t(conservacao))
 conservacao$Critério <- rownames(conservacao)
 conservacao$Critério <- as.factor(conservacao$Critério)
 
-positions <- c("Limpeza","Respeito\nàs\ninstituições","Outro","Árvores,\nanimais\ne\nágua","Engajamento\nda\ncomunidade\ne\nfrequência\nde\nvisitações","Tamanho\ndo\nfragmento","Existência\nde\nsímbolos\no\nsagrado","Total\nde\ncritérios\nmencionados")
+positions <- c("Limpeza","Respeito\nàs\ninstituições","Outro","Árvores,\nanimais\ne\nágua","Engajamento\nda\ncomunidade\ne\nfrequência\nde\nvisitações","Tamanho\ndo\nfragmento","Existência\nde\nsímbolos\no\nsagrado")
 
 levels(conservacao$Critério) <- gsub(" ", "\n", levels(conservacao$Critério))
 
