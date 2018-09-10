@@ -312,7 +312,7 @@ levels(tb$`Quem cuida da mata?`)[which(levels(tb$`Quem cuida da mata?`)=="Criado
 
 levels(tb$`Quem cuida da mata?`)[which(levels(tb$`Quem cuida da mata?`)=="Comunidade\nem\ngeral")] <- "Comunidade\nem geral"
 
-positions <- c("Não\nSabe", "Ninguém\ncuida", "Família\nChilaule", "Criadores\nde gado", "Autoridades\nComunitárias", "Comunidade\nem geral", "Governo e a\ncomunidade\nem geral")
+positions <- names(sort(table(subset(tb, tb$Sistema==levels(tb$Sistema)[1])$`Quem cuida da mata?`), decreasing = TRUE))[1:7]
 
 maxVar <- max(table(subset(tb, tb$Sistema==levels(tb$Sistema)[1])$`Quem cuida da mata?`))
 
@@ -328,7 +328,7 @@ ggplot(subset(tb, tb$Sistema==levels(tb$Sistema)[1]), aes(`Quem cuida da mata?`,
 
 Quem cuida da Mata Sagrada de Chirindzene
 ```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
-positions <- c("Comunidade\nem geral", "Não\nSabe", "Família\nMatavel", "Luís\nMatavel", "Autoridades\nLocais", "Ninguém\ncuida", "Alguns\nanciões", "Anciões\nda\nComunidade")
+positions <- names(sort(table(subset(tb, tb$Sistema==levels(tb$Sistema)[2])$`Quem cuida da mata?`), decreasing = TRUE))[1:8]
 
 maxVar <- max(table(subset(tb, tb$Sistema==levels(tb$Sistema)[2])$`Quem cuida da mata?`))
 
@@ -341,3 +341,27 @@ ggplot(subset(tb, tb$Sistema==levels(tb$Sistema)[2]), aes(`Quem cuida da mata?`,
   ylim(0, maxVar+5) +
   ggtitle("Quem cuida da Mata Sagrada de Chirindzene")
 ```
+
+Quem cuida da Mata Sagrada de Zongoene
+```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+positions <- names(sort(table(subset(tb, tb$Sistema==levels(tb$Sistema)[3])$`Quem cuida da mata?`), decreasing = TRUE))[1:16]
+
+maxVar <- max(table(subset(tb, tb$Sistema==levels(tb$Sistema)[2])$`Quem cuida da mata?`))
+
+ggplot(subset(tb, tb$Sistema==levels(tb$Sistema)[3]), aes(`Quem cuida da mata?`, fill = `Quem cuida da mata?`)) + 
+  geom_histogram(stat="count") +
+  scale_x_discrete(limits = positions, drop = FALSE) +
+  ylab("Frequência") +
+  theme(legend.position = "none", axis.text.x = element_text(angle=0)) +
+  geom_text(stat="count", aes(label=paste0(round(..count../nrow(subset(tb, tb$Sistema==levels(tb$Sistema)[3]))*100,2),"%")), position=position_dodge(width=0.9), vjust=-0.25) +
+  ylim(0, maxVar+5) +
+  ggtitle("Quem cuida da Mata Sagrada de Zongoene")
+```
+
+
+
+
+
+
+
+
