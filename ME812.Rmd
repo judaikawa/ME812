@@ -79,7 +79,6 @@ tb$`Há (mais ou menos) quanto tempo conhece a mata ?` <- as.numeric(tb$`Há (ma
 tb$`Total de critérios mencionados` <- ifelse(tb$`Total de critérios mencionados`=="?",0,tb$`Total de critérios mencionados`)
 tb$`Total de critérios mencionados` <- as.numeric(tb$`Total de critérios mencionados`)
 tb$`Como avalia o estado de conservação daquele lugar?` <- as.factor(tb$`Como avalia o estado de conservação daquele lugar?`)
-tb$Ocupação <- as.factor(tb$Ocupação)
 # Critérios
 # for(i in 14:20) {
 #   tb[,i] <- as.factor(tb[,i])
@@ -209,10 +208,14 @@ ggarrange(g1, g2, g3, nrow = 3, ncol = 1, heights = c(1, 1, 1.4))
 
 ##*Ocupação*
 ```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
-positions <- c("Agricultura\nfamiliar","Outra","Agricultura","Agricultora","Aposentado","Desempregado","Extrativismo","Medicina\ntradicional","Funcionario do\nSector Privado","Autoridade\ntradicional","Estudante","Funcionario\npúblico","Pesca\nartesanal","Terceiro\nsector","Liderança\nComunitária")
+
+tb$Ocupação <- ifelse(tb$Ocupação=="Agricultura" | tb$Ocupação=="Agricultora", "Agricultura familiar", tb$Ocupação)
+tb$Ocupação <- as.factor(tb$Ocupação)
+
+positions <- c("Agricultura\nfamiliar","Outra","Aposentado","Desempregado","Extrativismo","Medicina\ntradicional","Funcionario do\nSector Privado","Autoridade\ntradicional","Estudante","Funcionario\npúblico","Pesca\nartesanal","Terceiro\nsector","Liderança\nComunitária")
 
 levels(tb$Ocupação) <- gsub(" ", "\n", levels(tb$Ocupação))
-levels(tb$Ocupação)[9] <- "Funcionario do\nSector Privado"
+levels(tb$Ocupação)[7] <- "Funcionario do\nSector Privado"
 
 ggplot(tb, aes(Ocupação, fill = Ocupação)) +
   geom_histogram(stat="count") +
@@ -222,7 +225,7 @@ ggplot(tb, aes(Ocupação, fill = Ocupação)) +
                     #values=c( "#FFA8A8", "#D97BFD", "#86BCFF", "#72FE95", "#FFFF84", "#FFB347")) +
   theme(legend.position = "none", axis.text.x = element_text(angle=90, vjust = 0.5, hjust = 1)) +
   geom_text(stat="count", aes(label=paste0(round(..count../nrow(tb)*100,2),"%")), position=position_dodge(width=0.9), vjust=-0.25) +
-  ylim(0, 75) +
+  ylim(0, 90) +
   ggtitle("Ocupação dos entrevistados")
 ```
 
@@ -251,8 +254,8 @@ ggplot(conservacao, aes(x = Critério, y = V1, fill = Critério)) +
   scale_x_discrete(limits = positions, drop = FALSE) +
   ylab("Frequência") +
   theme(legend.position = "none", axis.text.x = element_text(angle=0)) +
-  #geom_text(stat="identity", aes(label=paste0(round(..count../nrow(tb)*100,2),"%")), position=position_dodge(width=0.9), vjust=-0.25) +
-  #ylim(0, 75) +
+  geom_text(stat="identity", aes(label=paste0(round(V1/nrow(tb)*100,2),"%")), position=position_dodge(width=0.9), vjust=-0.25) +
+  ylim(0, 55) +
   ggtitle("Critérios de estado de conservação")
 
 ```
