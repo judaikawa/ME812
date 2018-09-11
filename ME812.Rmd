@@ -21,96 +21,13 @@ library(reshape2)
 Sys.setlocale("LC_ALL", "en_US.UTF-8")
 ```
 
-Dados
-
-```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
-q1 <- read_excel("Q1_ Perfil dos Entrevistados.xlsx", sheet = 1)
-q2 <- read_excel("Q2_ Nome vulgar da Mata e Sacralidade.xlsx", sheet = 1) # engloba totalmente q1
-q3 <- read_excel("Q3_ Propriedade e Responsabilidade pela Gestão da Mata.xlsx", sheet = 1)
-q4 <- read_excel("Q4_ Estado de conservação e Critérios.xlsx", sheet = 1)
-q4_1 <- read_excel("Q4_1 Estado de Conservação_ Risco de desaparacimento.xlsx", sheet = 1)
-q5 <- read_excel("Q5_ Serviços Ecossistêmicos.xlsx", sheet = 1)
-q5_1 <- read_excel("Q5_1 Serviços Ecossistêmicos _Tendência da Qualidade.xlsx", sheet = 1)
-q5_2 <- read_excel("Q5_2 Serviços Ecossistêmicos Potenciais (Animais).xlsx", sheet = 1)
-q5_3 <- read_excel("Q5_3 Serviços Ecossistêmicos Potenciais (Plantas).xlsx", sheet = 1)
-q6 <- read_excel("Q6_  Conhecimento Sobre as Instituições.xlsx", sheet = 1)
-q6_1 <- read_excel("Q6_ 1 Eficiência das Instituições.xlsx", sheet = 1)
-q6_2 <- read_excel("Q6_ 2 Sanções.xlsx", sheet = 1)
-```
-
-Junção de todos os dados em uma única tabela
-
-```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
-tb <- q1 %>% 
-  left_join(q2, by = "Id", suffix = c("", ".REPETIDO10")) %>% 
-  left_join(q3, by = "Id", suffix = c("", ".REPETIDO1")) %>% 
-  left_join(q4, by = "Id", suffix = c("", ".REPETIDO2")) %>%
-  left_join(q4_1, by = "Id", suffix = c("", ".REPETIDO3")) %>%
-  left_join(q5, by = "Id", suffix = c("", ".REPETIDO4")) %>%
-  left_join(q5_1, by = "Id", suffix = c("", ".REPETIDO5")) %>%
-  left_join(q5_2, by = "Id", suffix = c("", ".REPETIDO6")) %>%
-  left_join(q5_3, by = "Id", suffix = c("", ".REPETIDO7")) %>%
-  left_join(q6, by = "Id", suffix = c("", ".REPETIDO8")) %>%
-  left_join(q6_1, by = "Id", suffix = c("", ".REPETIDO9")) %>%
-  left_join(q6_2, by = "Id", suffix = c("", ".REPETIDO0"))
-  
-
-tb <- tb[,!grepl("REPETIDO", names(tb))]
-
-tb <- tb[, -c(23, 24)] # repetidos 
-
-saveRDS(tb, file = "tabela")
-
-rm(q1, q2, q3, q4, q4_1, q5, q5_1, q5_2, q5_3, q6, q6_1, q6_2)
-```
-
-Ler dados já pronto
+#*Dados*
 ```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
 tb <- readRDS("tabela")
 
 head(tb)
 ```
 
-Mudando str do banco de dados
-Rodar apenas 1 vez
-```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
-tb$Sistema <- as.factor(tb$Sistema)
-tb$Sexo <- as.factor(tb$Sexo)
-tb$`Há (mais ou menos) quanto tempo conhece a mata ?` <- as.numeric(tb$`Há (mais ou menos) quanto tempo conhece a mata ?`) # há valores SR que foram transformados em NA
-tb$`Total de critérios mencionados` <- ifelse(tb$`Total de critérios mencionados`=="?",0,tb$`Total de critérios mencionados`)
-tb$`Total de critérios mencionados` <- as.numeric(tb$`Total de critérios mencionados`)
-
-tb$`Como avalia o estado de conservação daquele lugar?` <- ifelse(tb$`Como avalia o estado de conservação daquele lugar?`=="?", NA, tb$`Como avalia o estado de conservação daquele lugar?`)
-
-tb$`Como avalia o estado de conservação daquele lugar?` <- ifelse(tb$`Como avalia o estado de conservação daquele lugar?`=="Menos conservada do que antes", "Pior que antes", tb$`Como avalia o estado de conservação daquele lugar?`)
-
-tb$`Como avalia o estado de conservação daquele lugar?` <- ifelse(tb$`Como avalia o estado de conservação daquele lugar?`=="Menos mal conservada do que antes" | tb$`Como avalia o estado de conservação daquele lugar?`=="Melhor conservada do que antes", "Melhor que antes", tb$`Como avalia o estado de conservação daquele lugar?`)
-
-tb$`Como avalia o estado de conservação daquele lugar?` <- as.factor(tb$`Como avalia o estado de conservação daquele lugar?`)
-
-tb$`Reconhece Sacralidade?` <- as.factor(tb$`Reconhece Sacralidade?`)
-# Critérios
-# for(i in 14:20) {
-#   tb[,i] <- as.factor(tb[,i])
-# }
-
-tb$Ocupação <- ifelse(tb$Ocupação=="Agricultura" | tb$Ocupação=="Agricultora", "Agricultura familiar", tb$Ocupação)
-tb$Ocupação <- as.factor(tb$Ocupação)
-
-tb$`Quem e o dono da mata?` <- as.factor(tb$`Quem e o dono da mata?`)
-
-
-tb$`Quem cuida da mata?` <- ifelse(tb$`Quem cuida da mata?`=="O Autoridades locais e  Comunidade local" | 
-                                     tb$`Quem cuida da mata?`=="Autoridades locais e a Comunidade local", 
-                                   "Comunidade local e Autoridades locais", tb$`Quem cuida da mata?`)
-
-tb$`Quem cuida da mata?` <- ifelse(tb$`Quem cuida da mata?`=="Guardiões e Autoridades locais", 
-                                   "Autoridades locais e Guardiões", tb$`Quem cuida da mata?`)
-
-
-tb$`Quem cuida da mata?` <- as.factor(tb$`Quem cuida da mata?`)
-
-```
 
 #Perfil dos entrevistados
 
@@ -188,11 +105,6 @@ Faixa 1: 18-30;
 Faixa 2: 30-50;
 Faixa 3: 50 +
 ```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
-tb$FaixaIdade <- NA
-tb$FaixaIdade <- ifelse(tb$Idade<30, 1, 2)
-tb$FaixaIdade <- ifelse(tb$Idade>50, 3, tb$FaixaIdade)
-tb$FaixaIdade <- as.factor(tb$FaixaIdade)
-
 ggplot(tb, aes(Idade, fill = FaixaIdade)) +
   geom_histogram(stat="count") +
   ylab("Frequência") +
@@ -340,7 +252,7 @@ ggplot(conservacao, aes(x = Critério, y = V1, fill = Critério)) +
 ##*Dono da mata*
 ```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
 levels(tb$`Quem e o dono da mata?`) <- gsub(" ", "\n", levels(tb$`Quem e o dono da mata?`))
-levels(tb$`Quem e o dono da mata?`)[1] <- "Autoridades\nlocais e\nGuardiões"
+# levels(tb$`Quem e o dono da mata?`)[1] <- "Autoridades\nLocais E\nGuardiões"
 
 positions <- names(sort(table(tb$`Quem e o dono da mata?`), decreasing = TRUE))
 
@@ -456,7 +368,7 @@ donoCuida <- with(tb, table(`Quem e o dono da mata?`, `Quem cuida da mata?`))
 donoCuida
 ```
 
-```{r}
+```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
 
 dono <- data.frame(table(tb$`Quem e o dono da mata?`))
 
@@ -472,9 +384,7 @@ donoCuida <- melt(donoCuida, id.vars = "Var1")
 
 donoCuida$value <- ifelse(is.na(donoCuida$value), 0, donoCuida$value)
 
-positions <- c("Guardiões", "Não\nSabe", "Comunidade\nlocal", "Autoridades\nlocais\ne\nGuardiões", "Ninguém\ncuida", "Autoridades\nlocais", "Criadores\nde\ngado", "Comunidade\nlocal\ne\nAutoridades\nlocais", "Entidade\nMistica", "Não\nexiste")
-
-# maxVar <- max(table(subset(tb, tb$Sistema==levels(tb$Sistema)[3])$`Quem cuida da mata?`))
+positions <- c("Guardiões", "Não\nSabe", "Comunidade\nLocal", "Autoridades\nLocais\nE\nGuardiões", "Ninguém\nCuida", "Autoridades\nLocais", "Criadores\nDe\nGado", "Comunidade\nLocal\nE\nAutoridades\nLocais", "Entidade\nMistica", "Não\nExiste")
 
 ggplot(donoCuida, aes(x = Var1, y = value, fill = variable)) + 
   geom_bar(stat = "identity", position = "dodge") +
@@ -486,10 +396,6 @@ ggplot(donoCuida, aes(x = Var1, y = value, fill = variable)) +
         axis.text.x = element_text(angle=0)) +
   scale_fill_discrete(labels = c("Dono", "Cuida"), 
                       name = element_blank()) +
-  # geom_text(stat="count", 
-  #           aes(label=paste0(round(..count../nrow(subset(tb, tb$Sistema==levels(tb$Sistema)[3]))*100,2),"%")), 
-  #           position=position_dodge(width=0.9), vjust=-0.25) +
-  # ylim(0, maxVar+2) +
   ggtitle("Relação dono e quem cuida")
 
 ```

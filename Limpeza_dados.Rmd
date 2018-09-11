@@ -1,0 +1,107 @@
+---
+title: "ME812 - Limpeza dos dados"
+output: html_notebook
+---
+
+Lembrete: Se certificar que está na pasta correta, que contém os dados com getwd() e na hora de salvar usar UTF-8
+
+Bibliotecas
+Inserir aqui as bibliotecas necessárias (se não tiver no pc, instalar antes)
+```{r}
+library(readxl)
+library(dplyr)
+library(stringr)
+```
+
+
+##*Dados*
+
+Ler dados já pronto
+```{r}
+tb <- readRDS("tabela")
+```
+
+Dados fornecidos
+```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+q1 <- read_excel("Q1_ Perfil dos Entrevistados.xlsx", sheet = 1)
+q2 <- read_excel("Q2_ Nome vulgar da Mata e Sacralidade.xlsx", sheet = 1) # engloba totalmente q1
+q3 <- read_excel("Q3_ Propriedade e Responsabilidade pela Gestão da Mata.xlsx", sheet = 1)
+q4 <- read_excel("Q4_ Estado de conservação e Critérios.xlsx", sheet = 1)
+q4_1 <- read_excel("Q4_1 Estado de Conservação_ Risco de desaparacimento.xlsx", sheet = 1)
+q5 <- read_excel("Q5_ Serviços Ecossistêmicos.xlsx", sheet = 1)
+q5_1 <- read_excel("Q5_1 Serviços Ecossistêmicos _Tendência da Qualidade.xlsx", sheet = 1)
+q5_2 <- read_excel("Q5_2 Serviços Ecossistêmicos Potenciais (Animais).xlsx", sheet = 1)
+q5_3 <- read_excel("Q5_3 Serviços Ecossistêmicos Potenciais (Plantas).xlsx", sheet = 1)
+q6 <- read_excel("Q6_  Conhecimento Sobre as Instituições.xlsx", sheet = 1)
+q6_1 <- read_excel("Q6_ 1 Eficiência das Instituições.xlsx", sheet = 1)
+q6_2 <- read_excel("Q6_ 2 Sanções.xlsx", sheet = 1)
+```
+
+Junção de todos os dados em uma única tabela
+```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+tb <- q1 %>% 
+  left_join(q2, by = "Id", suffix = c("", ".REPETIDO10")) %>% 
+  left_join(q3, by = "Id", suffix = c("", ".REPETIDO1")) %>% 
+  left_join(q4, by = "Id", suffix = c("", ".REPETIDO2")) %>%
+  left_join(q4_1, by = "Id", suffix = c("", ".REPETIDO3")) %>%
+  left_join(q5, by = "Id", suffix = c("", ".REPETIDO4")) %>%
+  left_join(q5_1, by = "Id", suffix = c("", ".REPETIDO5")) %>%
+  left_join(q5_2, by = "Id", suffix = c("", ".REPETIDO6")) %>%
+  left_join(q5_3, by = "Id", suffix = c("", ".REPETIDO7")) %>%
+  left_join(q6, by = "Id", suffix = c("", ".REPETIDO8")) %>%
+  left_join(q6_1, by = "Id", suffix = c("", ".REPETIDO9")) %>%
+  left_join(q6_2, by = "Id", suffix = c("", ".REPETIDO0"))
+  
+
+tb <- tb[,!grepl("REPETIDO", names(tb))]
+
+tb <- tb[, -c(23, 24)] # repetidos 
+
+saveRDS(tb, file = "tabela")
+
+rm(q1, q2, q3, q4, q4_1, q5, q5_1, q5_2, q5_3, q6, q6_1, q6_2)
+```
+
+Arrumando formatação e str
+```{r}
+for(i in 1:ncol(tb)) {
+  tb[,i] <- lapply(tb[,i], str_to_title)[[1]]
+}
+
+tb$Sistema <- as.factor(tb$Sistema) # 3 categorias
+tb$Sexo <- as.factor(tb$Sexo) # numericos
+tb$Idade <- as.numeric(tb$Idade)
+tb$Ocupação <- ifelse(tb$Ocupação=="Agricultura" | tb$Ocupação=="Agricultora", "Agricultura Familiar", tb$Ocupação)
+tb$Ocupação <- as.factor(tb$Ocupação) # 13 categorias
+tb$`Há (mais ou menos) quanto tempo conhece a mata ?` <- as.numeric(tb$`Há (mais ou menos) quanto tempo conhece a mata ?`) # numerico obs: há valores SR que foram transformados em NA
+tb$`Reconhece Sacralidade?` <- as.factor(tb$`Reconhece Sacralidade?`) # 3 categorias
+tb$`A mata tem dono?` <- as.factor(tb$`A mata tem dono?`) # 3 categorias
+tb$`Quem e o dono da mata?` <- as.factor(tb$`Quem e o dono da mata?`) # 6 categorias
+tb$`Existe quem cuida para a mata continue como é?` <- as.factor(tb$`Existe quem cuida para a mata continue como é?`) # 3 categorias
+tb$`Quem cuida da mata?` <- ifelse(tb$`Quem cuida da mata?`=="O Autoridades Locais E  Comunidade Local" | 
+                                     tb$`Quem cuida da mata?`=="Autoridades Locais E A Comunidade Local", 
+                                   "Comunidade Local E Autoridades Locais", tb$`Quem cuida da mata?`)
+tb$`Quem cuida da mata?` <- ifelse(tb$`Quem cuida da mata?`=="Guardiões E Autoridades Locais", 
+                                   "Autoridades Locais E Guardiões", tb$`Quem cuida da mata?`)
+tb$`Quem cuida da mata?` <- as.factor(tb$`Quem cuida da mata?`) # 8 categorias
+
+tb$`Total de critérios mencionados` <- ifelse(tb$`Total de critérios mencionados`=="?",0,tb$`Total de critérios mencionados`)
+tb$`Total de critérios mencionados` <- as.numeric(tb$`Total de critérios mencionados`)
+
+tb$`Como avalia o estado de conservação daquele lugar?` <- ifelse(tb$`Como avalia o estado de conservação daquele lugar?`=="?", NA, tb$`Como avalia o estado de conservação daquele lugar?`)
+
+tb$`Como avalia o estado de conservação daquele lugar?` <- ifelse(tb$`Como avalia o estado de conservação daquele lugar?`=="Menos Conservada Do Que Antes", "Pior Que Antes", tb$`Como avalia o estado de conservação daquele lugar?`)
+
+tb$`Como avalia o estado de conservação daquele lugar?` <- ifelse(tb$`Como avalia o estado de conservação daquele lugar?`=="Menos Mal Conservada Do Que Antes" | tb$`Como avalia o estado de conservação daquele lugar?`=="Melhor Conservada Do Que Antes", "Melhor Que Antes", tb$`Como avalia o estado de conservação daquele lugar?`)
+
+tb$`Como avalia o estado de conservação daquele lugar?` <- as.factor(tb$`Como avalia o estado de conservação daquele lugar?`)
+
+# Variável FaixaIdade
+tb$FaixaIdade <- NA
+tb$FaixaIdade <- ifelse(tb$Idade<30, 1, 2)
+tb$FaixaIdade <- ifelse(tb$Idade>50, 3, tb$FaixaIdade)
+tb$FaixaIdade <- as.factor(tb$FaixaIdade)
+
+saveRDS(tb, file = "tabela")
+```
+
