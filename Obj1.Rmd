@@ -1,0 +1,506 @@
+---
+title: "Projeto ME812"
+output: html_notebook
+---
+
+Estudo qualitativo-quantitativo de florestas sagradas em Moçambique
+
+Lembrete: Se certificar que está na pasta correta, que contém os dados com getwd() e na hora de salvar usar UTF-8
+
+Bibliotecas
+Inserir aqui as bibliotecas necessárias (se não tiver no pc, instalar antes)
+```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+library(readxl)
+library(dplyr)
+library(ggplot2)
+library(ggpubr)
+library(reshape2)
+```
+
+```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+Sys.setlocale("LC_ALL", "en_US.UTF-8")
+```
+
+#*Dados*
+```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+tb <- readRDS("tabela")
+
+head(tb)
+```
+
+
+#Perfil dos entrevistados
+
+##*Sexo*
+```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+maxVar <- max(table(tb$Sexo))
+
+ggplot(tb, aes(Sexo, fill = Sexo)) +
+  geom_histogram(stat="count") +
+  ylab("Frequência") +
+  scale_fill_manual(labels = c("Feminino", "Masculino"), 
+                    values=c( "#FFA8A8", "#86BCFF", "#72FE95", "#FFFF84", "#FFB347")) +
+  theme(axis.title.y = element_blank(), 
+        axis.title.x = element_blank()) +
+  geom_text(stat="count", 
+            aes(label=paste0(..count.., " (",round(..count../nrow(tb)*100,2),"%)")), 
+            position=position_dodge(width=0.9), vjust=-0.25) +
+  ylim(0, maxVar+5) +
+  ggtitle("Sexo dos entrevistados")
+```
+
+##*Dividido por Sistemas*
+```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+maxVar <- max(table(subset(tb, tb$Sistema==levels(tb$Sistema)[1])$Sexo))
+g1 <- ggplot(subset(tb, tb$Sistema==levels(tb$Sistema)[1]), aes(Sexo, fill = Sexo)) +
+  geom_histogram(stat="count") +
+  ylab("") +
+  scale_fill_manual(labels = c("Feminino", "Masculino"), 
+                    values=c( "#FFA8A8", "#86BCFF", "#72FE95", "#FFFF84", "#FFB347")) +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(), 
+        legend.position = "none") +
+  geom_text(stat="count", 
+            aes(label=paste0(..count.., " (", round(..count../nrow(subset(tb, tb$Sistema==levels(tb$Sistema)[1]))*100,2),"%)")), 
+            position=position_dodge(width=0.9), vjust=-0.25) +
+  ylim(0, maxVar+20) +
+  ggtitle(levels(tb$Sistema)[1])
+
+maxVar <- max(table(subset(tb, tb$Sistema==levels(tb$Sistema)[2])$Sexo))
+g2 <- ggplot(subset(tb, tb$Sistema==levels(tb$Sistema)[2]), aes(Sexo, fill = Sexo)) +
+  geom_histogram(stat="count") +
+  ylab("Frequência") +
+  scale_fill_manual(labels = c("Feminino", "Masculino"), 
+                    values=c( "#FFA8A8", "#86BCFF", "#72FE95", "#FFFF84", "#FFB347")) +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(), 
+        legend.position = "none") +
+  geom_text(stat="count", 
+            aes(label=paste0(..count.., " (", round(..count../nrow(subset(tb, tb$Sistema==levels(tb$Sistema)[2]))*100,2),"%)")), 
+            position=position_dodge(width=0.9), vjust=-0.25) +
+  ylim(0, maxVar+20) +
+  ggtitle(levels(tb$Sistema)[2])
+
+maxVar <- max(table(subset(tb, tb$Sistema==levels(tb$Sistema)[3])$Sexo))
+g3 <- ggplot(subset(tb, tb$Sistema==levels(tb$Sistema)[3]), aes(Sexo, fill = Sexo)) +
+  geom_histogram(stat="count") +
+  ylab("") +
+  scale_fill_manual(labels = c("Feminino", "Masculino"), 
+                    values=c( "#FFA8A8", "#86BCFF", "#72FE95", "#FFFF84", "#FFB347")) +
+  theme(axis.title.y = element_blank(), 
+        axis.title.x = element_blank(),
+        legend.position = "bottom") +
+  geom_text(stat="count", 
+            aes(label=paste0(..count.., " (", round(..count../nrow(subset(tb, tb$Sistema==levels(tb$Sistema)[3]))*100,2),"%)")), 
+            position=position_dodge(width=0.9), vjust=-0.25) +
+  ylim(0, maxVar+20) +
+  ggtitle(levels(tb$Sistema)[3])
+
+ggarrange(g1, g2, g3, nrow = 3, ncol = 1, heights = c(1, 1, 1.3))
+
+```
+
+##*Idade*
+Faixa 1: 18-30;
+Faixa 2: 30-50;
+Faixa 3: 50 +
+```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+ggplot(tb, aes(Idade, fill = FaixaIdade)) +
+  geom_histogram(stat="count") +
+  ylab("Frequência") +
+  scale_fill_manual(labels = c("18-30", "31-54", "55 ou mais"), 
+                    values=c( "#FFA8A8", "#D97BFD", "#86BCFF", "#72FE95", "#FFFF84", "#FFB347")) +
+  theme(axis.title.y = element_blank(), 
+        axis.title.x = element_blank()) +
+  ggtitle("Idade dos entrevistados")
+```
+
+```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+summary(tb$Idade)
+```
+
+```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+maxVar <- max(table(tb$FaixaIdade))
+
+ggplot(tb, aes(FaixaIdade, fill = FaixaIdade)) +
+  geom_histogram(stat="count") +
+  ylab("Frequência") +
+  scale_fill_manual(labels = c("18-30", "31-54", "55 ou mais"), 
+                    values=c( "#FFA8A8", "#D97BFD", "#86BCFF", "#72FE95", "#FFFF84", "#FFB347")) +
+  theme(axis.title.y = element_blank(), 
+        axis.title.x = element_blank()) +
+  geom_text(stat="count", 
+            aes(label=paste0(round(..count../nrow(tb)*100,2),"%")), 
+            position=position_dodge(width=0.9), vjust=-0.25) +
+  ylim(0, maxVar+5) +
+  ggtitle("Idade dos entrevistados")
+```
+
+##*Dividido por Sistemas*
+```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+maxVar <- max(table(subset(tb, tb$Sistema==levels(tb$Sistema)[1])$FaixaIdade))
+g1 <- ggplot(subset(tb, tb$Sistema==levels(tb$Sistema)[1]), aes(FaixaIdade, fill = FaixaIdade)) +
+  geom_histogram(stat="count") +
+  ylab("") +
+  scale_fill_manual(labels = c("18-30", "31-54", "55 ou mais"), 
+                    values=c( "#FFA8A8", "#D97BFD", "#86BCFF", "#72FE95", "#FFFF84", "#FFB347")) +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(), 
+        legend.position = "none") +
+  geom_text(stat="count", 
+            aes(label=paste0(..count.., " (", round(..count../nrow(subset(tb, tb$Sistema==levels(tb$Sistema)[1]))*100,2),"%)")), 
+            position=position_dodge(width=0.9), vjust=-0.25) +
+  ylim(0, maxVar+20) +
+  ggtitle(levels(tb$Sistema)[1])
+
+maxVar <- max(table(subset(tb, tb$Sistema==levels(tb$Sistema)[2])$FaixaIdade))
+g2 <- ggplot(subset(tb, tb$Sistema==levels(tb$Sistema)[2]), aes(FaixaIdade, fill = FaixaIdade)) +
+  geom_histogram(stat="count") +
+  ylab("Frequência") +
+  scale_fill_manual(labels = c("18-30", "31-54", "55 ou mais"), 
+                    values=c( "#FFA8A8", "#D97BFD", "#86BCFF", "#72FE95", "#FFFF84", "#FFB347")) +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(), 
+        legend.position = "none") +
+  geom_text(stat="count", 
+            aes(label=paste0(..count.., " (", round(..count../nrow(subset(tb, tb$Sistema==levels(tb$Sistema)[2]))*100,2),"%)")), 
+            position=position_dodge(width=0.9), vjust=-0.25) +
+  ylim(0, maxVar+20) +
+  ggtitle(levels(tb$Sistema)[2])
+
+maxVar <- max(table(subset(tb, tb$Sistema==levels(tb$Sistema)[3])$FaixaIdade))
+g3 <- ggplot(subset(tb, tb$Sistema==levels(tb$Sistema)[3]), aes(FaixaIdade, fill = FaixaIdade)) +
+  geom_histogram(stat="count") +
+  ylab("") +
+  scale_fill_manual(labels = c("18-30", "31-54", "55 ou mais"), 
+                    values=c( "#FFA8A8", "#D97BFD", "#86BCFF", "#72FE95", "#FFFF84", "#FFB347")) +
+  theme(axis.title.y = element_blank(), 
+        axis.title.x = element_blank(),
+        legend.position = "bottom") +
+  geom_text(stat="count", 
+            aes(label=paste0(..count.., " (", round(..count../nrow(subset(tb, tb$Sistema==levels(tb$Sistema)[3]))*100,2),"%)")), 
+            position=position_dodge(width=0.9), vjust=-0.25) +
+  ylim(0, maxVar+20) +
+  ggtitle(levels(tb$Sistema)[3])
+
+ggarrange(g1, g2, g3, nrow = 3, ncol = 1, heights = c(1, 1, 1.4))
+```
+
+##*Ocupação*
+```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+levels(tb$Ocupação) <- gsub(" ", "\n", levels(tb$Ocupação))
+levels(tb$Ocupação)[7] <- "Funcionario do\nSector Privado"
+
+positions <- names(sort(table(tb$Ocupação), decreasing = TRUE))
+
+maxVar <- max(table(tb$Ocupação))
+
+ggplot(tb, aes(Ocupação, fill = Ocupação)) +
+  geom_histogram(stat="count") +
+  scale_x_discrete(limits = positions, drop = FALSE) +
+  ylab("Frequência") +
+  #scale_fill_manual(labels = c("18-30", "31-54", "55 ou mais"), 
+                    #values=c( "#FFA8A8", "#D97BFD", "#86BCFF", "#72FE95", "#FFFF84", "#FFB347")) +
+  theme(axis.title.y = element_blank(), 
+        axis.title.x = element_blank(),
+        legend.position = "none", axis.text.x = element_text(angle=90, vjust = 0.5, hjust = 1)) +
+  geom_text(stat="count", size = 3,
+            aes(label=paste0(..count.., "\n(", round(..count../nrow(tb)*100,2),"%)")), 
+            position=position_dodge(width=0.9), vjust=-0.25) +
+  ylim(0, maxVar+10) +
+  ggtitle("Ocupação dos entrevistados")
+```
+
+##*Estado de conservação*
+```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+
+conservacao <- tb[1,c(16:22)]
+conservacao$`Engajamento da comunidade e frequência de visitações` <- sum(as.numeric(tb$`Engajamento da comunidade e frequência de visitações`), na.rm = TRUE)
+conservacao$`Respeito às instituições` <- sum(as.numeric(tb$`Respeito às instituições`), na.rm = TRUE)
+conservacao$Limpeza <- sum(as.numeric(tb$Limpeza), na.rm = TRUE)
+conservacao$`Existência de símbolos o sagrado` <- sum(as.numeric(tb$`Existência de símbolos o sagrado`), na.rm = TRUE)
+conservacao$`Tamanho do fragmento` <- sum(as.numeric(tb$`Tamanho do fragmento`), na.rm = TRUE)
+conservacao$Outro <- sum(as.numeric(tb$Outro), na.rm = TRUE)
+conservacao$`Árvores, animais e água` <- sum(as.numeric(tb$`Árvores, animais e água`), na.rm = TRUE)
+
+conservacao <- as.data.frame(t(conservacao))
+conservacao$Critério <- rownames(conservacao)
+conservacao$Critério <- as.factor(conservacao$Critério)
+
+positions <- c("Limpeza","Respeito\nàs\ninstituições","Outro","Árvores,\nanimais\ne\nágua","Engajamento\nda\ncomunidade\ne\nfrequência\nde\nvisitações","Tamanho\ndo\nfragmento","Existência\nde\nsímbolos\no\nsagrado")
+
+levels(conservacao$Critério) <- gsub(" ", "\n", levels(conservacao$Critério))
+
+maxVar <- max(conservacao$V1)
+
+ggplot(conservacao, aes(x = Critério, y = V1, fill = Critério)) + 
+  geom_bar(stat = "identity") +
+  scale_x_discrete(limits = positions, drop = FALSE) +
+  ylab("Frequência") +
+  theme(axis.title.y = element_blank(), 
+        axis.title.x = element_blank(),
+        legend.position = "none", 
+        axis.text.x = element_text(angle=0)) +
+  geom_text(stat="identity", size = 3.5,
+            aes(label=paste0(V1, " (", round(V1/nrow(tb)*100,2),"%)")), 
+            position=position_dodge(width=0.9), vjust=-0.25) +
+  ylim(0, maxVar+5) +
+  ggtitle("Critérios de estado de conservação")
+
+```
+
+##*Dono da mata*
+```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+levels(tb$`Quem e o dono da mata?`) <- gsub(" ", "\n", levels(tb$`Quem e o dono da mata?`))
+# levels(tb$`Quem e o dono da mata?`)[1] <- "Autoridades\nLocais E\nGuardiões"
+
+positions <- names(sort(table(tb$`Quem e o dono da mata?`), decreasing = TRUE))
+
+maxVar <- max(table(tb$`Quem e o dono da mata?`))
+
+ggplot(tb, aes(`Quem e o dono da mata?`, fill = `Quem e o dono da mata?`)) + 
+  geom_histogram(stat="count") +
+  scale_x_discrete(limits = positions, drop = FALSE) +
+  ylab("Frequência") +
+  theme(axis.title.y = element_blank(), 
+        axis.title.x = element_blank(),
+        legend.position = "none", 
+        axis.text.x = element_text(angle=0)) +
+  geom_text(stat="count", 
+            aes(label=paste0(round(..count../nrow(tb)*100,2),"%")), 
+            position=position_dodge(width=0.9), vjust=-0.25) +
+  ylim(0, maxVar+5) +
+  ggtitle("Dono da mata")
+```
+
+##*Quem cuida da Mata Sagrada de Chilaulene*
+```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+levels(tb$`Quem e o dono da mata?`) <- gsub(" ", "\n", levels(tb$`Quem e o dono da mata?`))
+
+positions <- names(sort(table(subset(tb, tb$Sistema==levels(tb$Sistema)[1])$`Quem e o dono da mata?`), decreasing = TRUE))[1:4]
+
+maxVar <- max(table(subset(tb, tb$Sistema==levels(tb$Sistema)[1])$`Quem e o dono da mata?`))
+
+ggplot(subset(tb, tb$Sistema==levels(tb$Sistema)[1]), aes(`Quem e o dono da mata?`, fill = `Quem e o dono da mata?`)) + 
+  geom_histogram(stat="count") +
+  scale_x_discrete(limits = positions, drop = FALSE) +
+  ylab("Frequência") +
+  theme(axis.title.y = element_blank(), 
+        axis.title.x = element_blank(),
+        legend.position = "none", 
+        axis.text.x = element_text(angle=0)) +
+  geom_text(stat="count", 
+            aes(label=paste0(round(..count../nrow(subset(tb, tb$Sistema==levels(tb$Sistema)[1]))*100,2),"%")), 
+            position=position_dodge(width=0.9), vjust=-0.25) +
+  ylim(0, maxVar+2) +
+  ggtitle("Quem é o dono da Mata Sagrada de Chilaulene")
+```
+
+##*Quem cuida da Mata Sagrada de Chilaulene*
+```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+levels(tb$`Quem cuida da mata?`) <- gsub(" ", "\n", levels(tb$`Quem cuida da mata?`))
+
+positions <- names(sort(table(subset(tb, tb$Sistema==levels(tb$Sistema)[1])$`Quem cuida da mata?`), decreasing = TRUE))[1:7]
+
+maxVar <- max(table(subset(tb, tb$Sistema==levels(tb$Sistema)[1])$`Quem cuida da mata?`))
+
+ggplot(subset(tb, tb$Sistema==levels(tb$Sistema)[1]), aes(`Quem cuida da mata?`, fill = `Quem cuida da mata?`)) + 
+  geom_histogram(stat="count") +
+  scale_x_discrete(limits = positions, drop = FALSE) +
+  ylab("Frequência") +
+  theme(axis.title.y = element_blank(), 
+        axis.title.x = element_blank(),
+        legend.position = "none", 
+        axis.text.x = element_text(angle=0)) +
+  geom_text(stat="count", 
+            aes(label=paste0(round(..count../nrow(subset(tb, tb$Sistema==levels(tb$Sistema)[1]))*100,2),"%")), 
+            position=position_dodge(width=0.9), vjust=-0.25) +
+  ylim(0, maxVar+2) +
+  ggtitle("Quem cuida da Mata Sagrada de Chilaulene")
+```
+
+##*Quem cuida da Mata Sagrada de Chirindzene*
+```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+positions <- names(sort(table(subset(tb, tb$Sistema==levels(tb$Sistema)[2])$`Quem cuida da mata?`), decreasing = TRUE))[1:5]
+
+maxVar <- max(table(subset(tb, tb$Sistema==levels(tb$Sistema)[2])$`Quem cuida da mata?`))
+
+ggplot(subset(tb, tb$Sistema==levels(tb$Sistema)[2]), aes(`Quem cuida da mata?`, fill = `Quem cuida da mata?`)) + 
+  geom_histogram(stat="count") +
+  scale_x_discrete(limits = positions, drop = FALSE) +
+  ylab("Frequência") +
+  theme(axis.title.y = element_blank(), 
+        axis.title.x = element_blank(),
+        legend.position = "none", 
+        axis.text.x = element_text(angle=0)) +
+  geom_text(stat="count", 
+            aes(label=paste0(round(..count../nrow(subset(tb, tb$Sistema==levels(tb$Sistema)[2]))*100,2),"%")), 
+            position=position_dodge(width=0.9), vjust=-0.25) +
+  ylim(0, maxVar+2) +
+  ggtitle("Quem cuida da Mata Sagrada de Chirindzene")
+```
+
+##*Quem cuida da Mata Sagrada de Zongoene*
+```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+positions <- names(sort(table(subset(tb, tb$Sistema==levels(tb$Sistema)[3])$`Quem cuida da mata?`), decreasing = TRUE))[1:6]
+
+maxVar <- max(table(subset(tb, tb$Sistema==levels(tb$Sistema)[3])$`Quem cuida da mata?`))
+
+ggplot(subset(tb, tb$Sistema==levels(tb$Sistema)[3]), aes(`Quem cuida da mata?`, fill = `Quem cuida da mata?`)) + 
+  geom_histogram(stat="count") +
+  scale_x_discrete(limits = positions, drop = FALSE) +
+  ylab("Frequência") +
+  theme(axis.title.y = element_blank(), 
+        axis.title.x = element_blank(),
+        legend.position = "none", 
+        axis.text.x = element_text(angle=0)) +
+  geom_text(stat="count", 
+            aes(label=paste0(round(..count../nrow(subset(tb, tb$Sistema==levels(tb$Sistema)[3]))*100,2),"%")), 
+            position=position_dodge(width=0.9), vjust=-0.25) +
+  ylim(0, maxVar+2) +
+  ggtitle("Quem cuida da Mata Sagrada de Zongoene")
+```
+
+##*Relação dono e quem cuida*
+
+```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+donoCuida <- with(tb, table(`Quem e o dono da mata?`, `Quem cuida da mata?`))
+donoCuida
+```
+
+```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+
+dono <- data.frame(table(tb$`Quem e o dono da mata?`))
+
+cuida <- data.frame(table(tb$`Quem cuida da mata?`))
+
+donoCuida <- data.frame(Var1 = union(unique(tb$`Quem cuida da mata?`), unique(tb$`Quem e o dono da mata?`)))
+
+donoCuida <- donoCuida %>% left_join(dono, by = "Var1")
+
+donoCuida <- donoCuida %>% left_join(cuida, by = "Var1", suffix = c(".dono", ".cuida"))
+
+donoCuida <- melt(donoCuida, id.vars = "Var1")
+
+donoCuida$value <- ifelse(is.na(donoCuida$value), 0, donoCuida$value)
+
+positions <- c("Guardiões", "Não\nSabe", "Comunidade\nLocal", "Autoridades\nLocais\nE\nGuardiões", "Ninguém\nCuida", "Autoridades\nLocais", "Criadores\nDe\nGado", "Comunidade\nLocal\nE\nAutoridades\nLocais", "Entidade\nMistica", "Não\nExiste")
+
+ggplot(donoCuida, aes(x = Var1, y = value, fill = variable)) + 
+  geom_bar(stat = "identity", position = "dodge") +
+  scale_x_discrete(limits = positions, drop = FALSE) +
+  ylab("Frequência") +
+  theme(axis.title.y = element_blank(),
+        axis.title.x = element_blank(),
+        legend.position = "bottom",
+        axis.text.x = element_text(angle=0)) +
+  scale_fill_discrete(labels = c("Dono", "Cuida"), 
+                      name = element_blank()) +
+  ggtitle("Relação dono e quem cuida")
+
+```
+
+
+##*Sacralidade*
+```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+positions <- names(sort(table(tb$`Reconhece Sacralidade?`), decreasing = TRUE))
+
+maxVar <- max(table(tb$`Reconhece Sacralidade?`))
+
+ggplot(tb, aes(`Reconhece Sacralidade?`, fill = `Reconhece Sacralidade?`)) + 
+  geom_histogram(stat="count") +
+  scale_x_discrete(limits = positions, drop = FALSE) +
+  ylab("Frequência") +
+  theme(axis.title.y = element_blank(), 
+        axis.title.x = element_blank(),
+        legend.position = "none", axis.text.x = element_text(angle=0)) +
+  geom_text(stat="count", 
+            aes(label=paste0(..count.., " (", round(..count../nrow(tb)*100,2),"%)")), 
+            position=position_dodge(width=0.9), vjust=-0.25) +
+  ylim(0, maxVar+5) +
+  ggtitle("Sacralidade")
+```
+
+```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+faixasIdade <- c("18-30", "31-54", "55 ou mais")
+
+positions <- names(sort(table(subset(tb, tb$FaixaIdade==1)$`Reconhece Sacralidade?`), decreasing = TRUE))
+
+maxVar <- max(table(subset(tb, tb$FaixaIdade==1)$`Reconhece Sacralidade?`))
+
+g1 <- ggplot(subset(tb, tb$FaixaIdade==1), aes(`Reconhece Sacralidade?`, fill = `Reconhece Sacralidade?`)) +
+  geom_histogram(stat="count") +
+  scale_x_discrete(limits = positions, drop = FALSE) +
+  ylab("") +
+  theme(axis.title.x = element_blank(), 
+        axis.title.y = element_blank(), 
+        legend.position = "none", 
+        axis.text.x = element_text(angle=0)) +
+  geom_text(stat="count", 
+            aes(label=paste0(..count.., " (", round(..count../nrow(subset(tb, tb$FaixaIdade==1))*100,2),"%)")), 
+            position=position_dodge(width=0.9), vjust=-0.25) +
+  ylim(0, maxVar+20) +
+  ggtitle(faixasIdade[1])
+
+maxVar <- max(table(subset(tb, tb$FaixaIdade==2)$`Reconhece Sacralidade?`))
+
+g2 <- ggplot(subset(tb, tb$FaixaIdade==2), aes(`Reconhece Sacralidade?`, fill = `Reconhece Sacralidade?`)) +
+  geom_histogram(stat="count") +
+  scale_x_discrete(limits = positions, drop = FALSE) +
+  ylab("Frequência") +
+  scale_fill_discrete(drop = FALSE) +
+  theme(axis.title.x = element_blank(), 
+        axis.title.y = element_blank(), 
+        legend.position = "none", 
+        axis.text.x = element_text(angle=0)) +
+  geom_text(stat="count", 
+            aes(label=paste0(..count.., " (", round(..count../nrow(subset(tb, tb$FaixaIdade==2))*100,2),"%)")), 
+            position=position_dodge(width=0.9), vjust=-0.25) +
+  ylim(0, maxVar+20) +
+  ggtitle(faixasIdade[2])
+
+maxVar <- max(table(subset(tb, tb$FaixaIdade==3)$`Reconhece Sacralidade?`))
+
+g3 <- ggplot(subset(tb, tb$FaixaIdade==3), aes(`Reconhece Sacralidade?`, fill = `Reconhece Sacralidade?`)) +
+  geom_histogram(stat="count") +
+  scale_x_discrete(limits = positions, drop = FALSE) +
+  ylab("") +
+  scale_fill_discrete(drop = FALSE) +
+  theme(axis.title.y = element_blank(), 
+        axis.title.x = element_blank(),
+        legend.position = "none", 
+        axis.text.x = element_text(angle=0)) +
+  geom_text(stat="count", 
+            aes(label=paste0(..count.., " (", round(..count../nrow(subset(tb, tb$FaixaIdade==3))*100,2),"%)")), 
+            position=position_dodge(width=0.9), vjust=-0.25) +
+  ylim(0, maxVar+20) +
+  ggtitle(faixasIdade[3])
+
+ggarrange(g1, g2, g3, nrow = 3, ncol = 1, heights = c(1, 1, 1.2), labels = c("Reconhece Sacaralidade?"), label.x = 0)
+
+```
+
+##*Estado de Conservação*
+```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+levels(tb$`Como avalia o estado de conservação daquele lugar?`) <- gsub(" ", "\n", levels(tb$`Como avalia o estado de conservação daquele lugar?`))
+
+positions <- names(sort(table(tb$`Como avalia o estado de conservação daquele lugar?`), decreasing = TRUE))
+
+maxVar <- max(table(tb$`Como avalia o estado de conservação daquele lugar?`))
+
+ggplot(tb, aes(`Como avalia o estado de conservação daquele lugar?`, fill = `Como avalia o estado de conservação daquele lugar?`)) + 
+  geom_histogram(stat="count") +
+  scale_x_discrete(limits = positions, drop = FALSE) +
+  labs(fill='Estado') +
+  ylab("Frequência") +
+  theme(axis.title.y = element_blank(), 
+        axis.title.x = element_blank(),
+        legend.position = "none", 
+        axis.text.x = element_text(angle=0)) +
+  geom_text(stat="count", 
+            aes(label=paste0(..count.., " (", round(..count../nrow(tb)*100,2),"%)")), 
+            position=position_dodge(width=0.9), vjust=-0.25) +
+  ylim(0, maxVar+5) +
+  ggtitle("Estado de conservação") 
+```
+
