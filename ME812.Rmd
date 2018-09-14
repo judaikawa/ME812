@@ -43,7 +43,7 @@ ggplot(tb, aes(Sexo, fill = Sexo)) +
   theme(axis.title.y = element_blank(), 
         axis.title.x = element_blank()) +
   geom_text(stat="count", 
-            aes(label=paste0(round(..count../nrow(tb)*100,2),"%")), 
+            aes(label=paste0(..count.., " (",round(..count../nrow(tb)*100,2),"%)")), 
             position=position_dodge(width=0.9), vjust=-0.25) +
   ylim(0, maxVar+5) +
   ggtitle("Sexo dos entrevistados")
@@ -61,7 +61,7 @@ g1 <- ggplot(subset(tb, tb$Sistema==levels(tb$Sistema)[1]), aes(Sexo, fill = Sex
         axis.title.y = element_blank(), 
         legend.position = "none") +
   geom_text(stat="count", 
-            aes(label=paste0(round(..count../nrow(subset(tb, tb$Sistema==levels(tb$Sistema)[1]))*100,2),"%")), 
+            aes(label=paste0(..count.., " (", round(..count../nrow(subset(tb, tb$Sistema==levels(tb$Sistema)[1]))*100,2),"%)")), 
             position=position_dodge(width=0.9), vjust=-0.25) +
   ylim(0, maxVar+20) +
   ggtitle(levels(tb$Sistema)[1])
@@ -76,7 +76,7 @@ g2 <- ggplot(subset(tb, tb$Sistema==levels(tb$Sistema)[2]), aes(Sexo, fill = Sex
         axis.title.y = element_blank(), 
         legend.position = "none") +
   geom_text(stat="count", 
-            aes(label=paste0(round(..count../nrow(subset(tb, tb$Sistema==levels(tb$Sistema)[2]))*100,2),"%")), 
+            aes(label=paste0(..count.., " (", round(..count../nrow(subset(tb, tb$Sistema==levels(tb$Sistema)[2]))*100,2),"%)")), 
             position=position_dodge(width=0.9), vjust=-0.25) +
   ylim(0, maxVar+20) +
   ggtitle(levels(tb$Sistema)[2])
@@ -91,7 +91,7 @@ g3 <- ggplot(subset(tb, tb$Sistema==levels(tb$Sistema)[3]), aes(Sexo, fill = Sex
         axis.title.x = element_blank(),
         legend.position = "bottom") +
   geom_text(stat="count", 
-            aes(label=paste0(round(..count../nrow(subset(tb, tb$Sistema==levels(tb$Sistema)[3]))*100,2),"%")), 
+            aes(label=paste0(..count.., " (", round(..count../nrow(subset(tb, tb$Sistema==levels(tb$Sistema)[3]))*100,2),"%)")), 
             position=position_dodge(width=0.9), vjust=-0.25) +
   ylim(0, maxVar+20) +
   ggtitle(levels(tb$Sistema)[3])
@@ -148,7 +148,7 @@ g1 <- ggplot(subset(tb, tb$Sistema==levels(tb$Sistema)[1]), aes(FaixaIdade, fill
         axis.title.y = element_blank(), 
         legend.position = "none") +
   geom_text(stat="count", 
-            aes(label=paste0(round(..count../nrow(subset(tb, tb$Sistema==levels(tb$Sistema)[1]))*100,2),"%")), 
+            aes(label=paste0(..count.., " (", round(..count../nrow(subset(tb, tb$Sistema==levels(tb$Sistema)[1]))*100,2),"%)")), 
             position=position_dodge(width=0.9), vjust=-0.25) +
   ylim(0, maxVar+20) +
   ggtitle(levels(tb$Sistema)[1])
@@ -163,7 +163,7 @@ g2 <- ggplot(subset(tb, tb$Sistema==levels(tb$Sistema)[2]), aes(FaixaIdade, fill
         axis.title.y = element_blank(), 
         legend.position = "none") +
   geom_text(stat="count", 
-            aes(label=paste0(round(..count../nrow(subset(tb, tb$Sistema==levels(tb$Sistema)[2]))*100,2),"%")), 
+            aes(label=paste0(..count.., " (", round(..count../nrow(subset(tb, tb$Sistema==levels(tb$Sistema)[2]))*100,2),"%)")), 
             position=position_dodge(width=0.9), vjust=-0.25) +
   ylim(0, maxVar+20) +
   ggtitle(levels(tb$Sistema)[2])
@@ -178,7 +178,7 @@ g3 <- ggplot(subset(tb, tb$Sistema==levels(tb$Sistema)[3]), aes(FaixaIdade, fill
         axis.title.x = element_blank(),
         legend.position = "bottom") +
   geom_text(stat="count", 
-            aes(label=paste0(round(..count../nrow(subset(tb, tb$Sistema==levels(tb$Sistema)[3]))*100,2),"%")), 
+            aes(label=paste0(..count.., " (", round(..count../nrow(subset(tb, tb$Sistema==levels(tb$Sistema)[3]))*100,2),"%)")), 
             position=position_dodge(width=0.9), vjust=-0.25) +
   ylim(0, maxVar+20) +
   ggtitle(levels(tb$Sistema)[3])
@@ -204,10 +204,10 @@ ggplot(tb, aes(Ocupação, fill = Ocupação)) +
   theme(axis.title.y = element_blank(), 
         axis.title.x = element_blank(),
         legend.position = "none", axis.text.x = element_text(angle=90, vjust = 0.5, hjust = 1)) +
-  geom_text(stat="count", 
-            aes(label=paste0(round(..count../nrow(tb)*100,2),"%")), 
+  geom_text(stat="count", size = 3,
+            aes(label=paste0(..count.., "\n(", round(..count../nrow(tb)*100,2),"%)")), 
             position=position_dodge(width=0.9), vjust=-0.25) +
-  ylim(0, maxVar+5) +
+  ylim(0, maxVar+10) +
   ggtitle("Ocupação dos entrevistados")
 ```
 
@@ -241,8 +241,8 @@ ggplot(conservacao, aes(x = Critério, y = V1, fill = Critério)) +
         axis.title.x = element_blank(),
         legend.position = "none", 
         axis.text.x = element_text(angle=0)) +
-  geom_text(stat="identity", 
-            aes(label=paste0(round(V1/nrow(tb)*100,2),"%")), 
+  geom_text(stat="identity", size = 3.5,
+            aes(label=paste0(V1, " (", round(V1/nrow(tb)*100,2),"%)")), 
             position=position_dodge(width=0.9), vjust=-0.25) +
   ylim(0, maxVar+5) +
   ggtitle("Critérios de estado de conservação")
@@ -415,7 +415,7 @@ ggplot(tb, aes(`Reconhece Sacralidade?`, fill = `Reconhece Sacralidade?`)) +
         axis.title.x = element_blank(),
         legend.position = "none", axis.text.x = element_text(angle=0)) +
   geom_text(stat="count", 
-            aes(label=paste0(round(..count../nrow(tb)*100,2),"%")), 
+            aes(label=paste0(..count.., " (", round(..count../nrow(tb)*100,2),"%)")), 
             position=position_dodge(width=0.9), vjust=-0.25) +
   ylim(0, maxVar+5) +
   ggtitle("Sacralidade")
@@ -437,7 +437,7 @@ g1 <- ggplot(subset(tb, tb$FaixaIdade==1), aes(`Reconhece Sacralidade?`, fill = 
         legend.position = "none", 
         axis.text.x = element_text(angle=0)) +
   geom_text(stat="count", 
-            aes(label=paste0(round(..count../nrow(subset(tb, tb$FaixaIdade==1))*100,2),"%")), 
+            aes(label=paste0(..count.., " (", round(..count../nrow(subset(tb, tb$FaixaIdade==1))*100,2),"%)")), 
             position=position_dodge(width=0.9), vjust=-0.25) +
   ylim(0, maxVar+20) +
   ggtitle(faixasIdade[1])
@@ -454,7 +454,7 @@ g2 <- ggplot(subset(tb, tb$FaixaIdade==2), aes(`Reconhece Sacralidade?`, fill = 
         legend.position = "none", 
         axis.text.x = element_text(angle=0)) +
   geom_text(stat="count", 
-            aes(label=paste0(round(..count../nrow(subset(tb, tb$FaixaIdade==2))*100,2),"%")), 
+            aes(label=paste0(..count.., " (", round(..count../nrow(subset(tb, tb$FaixaIdade==2))*100,2),"%)")), 
             position=position_dodge(width=0.9), vjust=-0.25) +
   ylim(0, maxVar+20) +
   ggtitle(faixasIdade[2])
@@ -471,7 +471,7 @@ g3 <- ggplot(subset(tb, tb$FaixaIdade==3), aes(`Reconhece Sacralidade?`, fill = 
         legend.position = "none", 
         axis.text.x = element_text(angle=0)) +
   geom_text(stat="count", 
-            aes(label=paste0(round(..count../nrow(subset(tb, tb$FaixaIdade==3))*100,2),"%")), 
+            aes(label=paste0(..count.., " (", round(..count../nrow(subset(tb, tb$FaixaIdade==3))*100,2),"%)")), 
             position=position_dodge(width=0.9), vjust=-0.25) +
   ylim(0, maxVar+20) +
   ggtitle(faixasIdade[3])
@@ -498,7 +498,7 @@ ggplot(tb, aes(`Como avalia o estado de conservação daquele lugar?`, fill = `C
         legend.position = "none", 
         axis.text.x = element_text(angle=0)) +
   geom_text(stat="count", 
-            aes(label=paste0(round(..count../nrow(tb)*100,2),"%")), 
+            aes(label=paste0(..count.., " (", round(..count../nrow(tb)*100,2),"%)")), 
             position=position_dodge(width=0.9), vjust=-0.25) +
   ylim(0, maxVar+5) +
   ggtitle("Estado de conservação") 

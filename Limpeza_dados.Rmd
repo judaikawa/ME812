@@ -37,6 +37,16 @@ q6_1 <- read_excel("Q6_ 1 Eficiência das Instituições.xlsx", sheet = 1)
 q6_2 <- read_excel("Q6_ 2 Sanções.xlsx", sheet = 1)
 ```
 
+Tabelas q5 e q5_1 com variáveis de mesmos nomes
+```{r}
+
+names(q5_1)[which(names(q5_1)=="S. Provisão")] <- "S. Provisão Tendencia"
+names(q5_1)[which(names(q5_1)=="S. Cultural")] <- "S. Cultural Tendencia"
+names(q5_1)[which(names(q5_1)=="S. Suporte e Regulação")] <- "S. Suporte e Regulação Tendencia"
+
+```
+
+
 Junção de todos os dados em uma única tabela
 ```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
 tb <- q1 %>% 
