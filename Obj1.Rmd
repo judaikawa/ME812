@@ -215,13 +215,155 @@ ggplot(tb, aes(Ocupação, fill = Ocupação)) +
 ```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
 
 conservacao <- tb[1,c(16:22)]
+
 conservacao$`Engajamento da comunidade e frequência de visitações` <- sum(as.numeric(tb$`Engajamento da comunidade e frequência de visitações`), na.rm = TRUE)
+
 conservacao$`Respeito às instituições` <- sum(as.numeric(tb$`Respeito às instituições`), na.rm = TRUE)
+
 conservacao$Limpeza <- sum(as.numeric(tb$Limpeza), na.rm = TRUE)
+
 conservacao$`Existência de símbolos o sagrado` <- sum(as.numeric(tb$`Existência de símbolos o sagrado`), na.rm = TRUE)
+
 conservacao$`Tamanho do fragmento` <- sum(as.numeric(tb$`Tamanho do fragmento`), na.rm = TRUE)
+
 conservacao$Outro <- sum(as.numeric(tb$Outro), na.rm = TRUE)
+
 conservacao$`Árvores, animais e água` <- sum(as.numeric(tb$`Árvores, animais e água`), na.rm = TRUE)
+
+conservacao <- as.data.frame(t(conservacao))
+conservacao$Critério <- rownames(conservacao)
+conservacao$Critério <- as.factor(conservacao$Critério)
+
+positions <- c("Limpeza","Respeito\nàs\ninstituições","Outro","Árvores,\nanimais\ne\nágua","Engajamento\nda\ncomunidade\ne\nfrequência\nde\nvisitações","Tamanho\ndo\nfragmento","Existência\nde\nsímbolos\no\nsagrado")
+
+levels(conservacao$Critério) <- gsub(" ", "\n", levels(conservacao$Critério))
+
+maxVar <- max(conservacao$V1)
+
+ggplot(conservacao, aes(x = Critério, y = V1, fill = Critério)) + 
+  geom_bar(stat = "identity") +
+  scale_x_discrete(limits = positions, drop = FALSE) +
+  ylab("Frequência") +
+  theme(axis.title.y = element_blank(), 
+        axis.title.x = element_blank(),
+        legend.position = "none", 
+        axis.text.x = element_text(angle=0)) +
+  geom_text(stat="identity", size = 3.5,
+            aes(label=paste0(V1, " (", round(V1/nrow(tb)*100,2),"%)")), 
+            position=position_dodge(width=0.9), vjust=-0.25) +
+  ylim(0, maxVar+5) +
+  ggtitle("Critérios de estado de conservação")
+
+```
+
+##*Estado de conservação Mata 1*
+```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+
+conservacao <- tb[1,c(16:22)]
+
+conservacao$`Engajamento da comunidade e frequência de visitações` <- sum(as.numeric(subset(tb, tb$Sistema==levels(tb$Sistema)[1])$`Engajamento da comunidade e frequência de visitações`), na.rm = TRUE)
+
+conservacao$`Respeito às instituições` <- sum(as.numeric(subset(tb, tb$Sistema==levels(tb$Sistema)[1])$`Respeito às instituições`), na.rm = TRUE)
+
+conservacao$Limpeza <- sum(as.numeric(subset(tb, tb$Sistema==levels(tb$Sistema)[1])$Limpeza), na.rm = TRUE)
+
+conservacao$`Existência de símbolos o sagrado` <- sum(as.numeric(subset(tb, tb$Sistema==levels(tb$Sistema)[1])$`Existência de símbolos o sagrado`), na.rm = TRUE)
+
+conservacao$`Tamanho do fragmento` <- sum(as.numeric(subset(tb, tb$Sistema==levels(tb$Sistema)[1])$`Tamanho do fragmento`), na.rm = TRUE)
+
+conservacao$Outro <- sum(as.numeric(subset(tb, tb$Sistema==levels(tb$Sistema)[1])$Outro), na.rm = TRUE)
+
+conservacao$`Árvores, animais e água` <- sum(as.numeric(subset(tb, tb$Sistema==levels(tb$Sistema)[1])$`Árvores, animais e água`), na.rm = TRUE)
+
+conservacao <- as.data.frame(t(conservacao))
+conservacao$Critério <- rownames(conservacao)
+conservacao$Critério <- as.factor(conservacao$Critério)
+
+positions <- c("Limpeza","Respeito\nàs\ninstituições","Outro","Árvores,\nanimais\ne\nágua","Engajamento\nda\ncomunidade\ne\nfrequência\nde\nvisitações","Tamanho\ndo\nfragmento","Existência\nde\nsímbolos\no\nsagrado")
+
+levels(conservacao$Critério) <- gsub(" ", "\n", levels(conservacao$Critério))
+
+maxVar <- max(conservacao$V1)
+
+ggplot(conservacao, aes(x = Critério, y = V1, fill = Critério)) + 
+  geom_bar(stat = "identity") +
+  scale_x_discrete(limits = positions, drop = FALSE) +
+  ylab("Frequência") +
+  theme(axis.title.y = element_blank(), 
+        axis.title.x = element_blank(),
+        legend.position = "none", 
+        axis.text.x = element_text(angle=0)) +
+  geom_text(stat="identity", size = 3.5,
+            aes(label=paste0(V1, " (", round(V1/nrow(tb)*100,2),"%)")), 
+            position=position_dodge(width=0.9), vjust=-0.25) +
+  ylim(0, maxVar+5) +
+  ggtitle("Critérios de estado de conservação")
+
+```
+
+##*Estado de conservação Mata 2*
+```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+
+conservacao <- tb[1,c(16:22)]
+
+conservacao$`Engajamento da comunidade e frequência de visitações` <- sum(as.numeric(subset(tb, tb$Sistema==levels(tb$Sistema)[2])$`Engajamento da comunidade e frequência de visitações`), na.rm = TRUE)
+
+conservacao$`Respeito às instituições` <- sum(as.numeric(subset(tb, tb$Sistema==levels(tb$Sistema)[2])$`Respeito às instituições`), na.rm = TRUE)
+
+conservacao$Limpeza <- sum(as.numeric(subset(tb, tb$Sistema==levels(tb$Sistema)[2])$Limpeza), na.rm = TRUE)
+
+conservacao$`Existência de símbolos o sagrado` <- sum(as.numeric(subset(tb, tb$Sistema==levels(tb$Sistema)[2])$`Existência de símbolos o sagrado`), na.rm = TRUE)
+
+conservacao$`Tamanho do fragmento` <- sum(as.numeric(subset(tb, tb$Sistema==levels(tb$Sistema)[2])$`Tamanho do fragmento`), na.rm = TRUE)
+
+conservacao$Outro <- sum(as.numeric(subset(tb, tb$Sistema==levels(tb$Sistema)[2])$Outro), na.rm = TRUE)
+
+conservacao$`Árvores, animais e água` <- sum(as.numeric(subset(tb, tb$Sistema==levels(tb$Sistema)[2])$`Árvores, animais e água`), na.rm = TRUE)
+
+conservacao <- as.data.frame(t(conservacao))
+conservacao$Critério <- rownames(conservacao)
+conservacao$Critério <- as.factor(conservacao$Critério)
+
+positions <- c("Limpeza","Respeito\nàs\ninstituições","Outro","Árvores,\nanimais\ne\nágua","Engajamento\nda\ncomunidade\ne\nfrequência\nde\nvisitações","Tamanho\ndo\nfragmento","Existência\nde\nsímbolos\no\nsagrado")
+
+levels(conservacao$Critério) <- gsub(" ", "\n", levels(conservacao$Critério))
+
+maxVar <- max(conservacao$V1)
+
+ggplot(conservacao, aes(x = Critério, y = V1, fill = Critério)) + 
+  geom_bar(stat = "identity") +
+  scale_x_discrete(limits = positions, drop = FALSE) +
+  ylab("Frequência") +
+  theme(axis.title.y = element_blank(), 
+        axis.title.x = element_blank(),
+        legend.position = "none", 
+        axis.text.x = element_text(angle=0)) +
+  geom_text(stat="identity", size = 3.5,
+            aes(label=paste0(V1, " (", round(V1/nrow(tb)*100,2),"%)")), 
+            position=position_dodge(width=0.9), vjust=-0.25) +
+  ylim(0, maxVar+5) +
+  ggtitle("Critérios de estado de conservação")
+
+```
+
+##*Estado de conservação Mata 3*
+```{r, echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+
+conservacao <- tb[1,c(16:22)]
+
+conservacao$`Engajamento da comunidade e frequência de visitações` <- sum(as.numeric(subset(tb, tb$Sistema==levels(tb$Sistema)[3])$`Engajamento da comunidade e frequência de visitações`), na.rm = TRUE)
+
+conservacao$`Respeito às instituições` <- sum(as.numeric(subset(tb, tb$Sistema==levels(tb$Sistema)[3])$`Respeito às instituições`), na.rm = TRUE)
+
+conservacao$Limpeza <- sum(as.numeric(subset(tb, tb$Sistema==levels(tb$Sistema)[3])$Limpeza), na.rm = TRUE)
+
+conservacao$`Existência de símbolos o sagrado` <- sum(as.numeric(subset(tb, tb$Sistema==levels(tb$Sistema)[3])$`Existência de símbolos o sagrado`), na.rm = TRUE)
+
+conservacao$`Tamanho do fragmento` <- sum(as.numeric(subset(tb, tb$Sistema==levels(tb$Sistema)[3])$`Tamanho do fragmento`), na.rm = TRUE)
+
+conservacao$Outro <- sum(as.numeric(subset(tb, tb$Sistema==levels(tb$Sistema)[3])$Outro), na.rm = TRUE)
+
+conservacao$`Árvores, animais e água` <- sum(as.numeric(subset(tb, tb$Sistema==levels(tb$Sistema)[3])$`Árvores, animais e água`), na.rm = TRUE)
 
 conservacao <- as.data.frame(t(conservacao))
 conservacao$Critério <- rownames(conservacao)
