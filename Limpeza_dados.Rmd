@@ -104,13 +104,19 @@ tb$`Como avalia o estado de conservação daquele lugar?` <- ifelse(tb$`Como ava
 
 tb$`Como avalia o estado de conservação daquele lugar?` <- ifelse(tb$`Como avalia o estado de conservação daquele lugar?`=="Menos Mal Conservada Do Que Antes" | tb$`Como avalia o estado de conservação daquele lugar?`=="Melhor Conservada Do Que Antes", "Melhor Que Antes", tb$`Como avalia o estado de conservação daquele lugar?`)
 
-tb$`Como avalia o estado de conservação daquele lugar?` <- as.factor(tb$`Como avalia o estado de conservação daquele lugar?`)
-
 # Variável FaixaIdade
 tb$FaixaIdade <- NA
 tb$FaixaIdade <- ifelse(tb$Idade<30, 1, 2)
 tb$FaixaIdade <- ifelse(tb$Idade>50, 3, tb$FaixaIdade)
 tb$FaixaIdade <- as.factor(tb$FaixaIdade)
+
+# Estado de conservação
+tb$`Como avalia o estado de conservação daquele lugar?` <- ifelse(tb$`Como avalia o estado de conservação daquele lugar?`=="Pior Que Antes", 
+                                   "Mau", tb$`Como avalia o estado de conservação daquele lugar?`)
+tb$`Como avalia o estado de conservação daquele lugar?` <- ifelse(tb$`Como avalia o estado de conservação daquele lugar?`=="Melhor Que Antes", 
+                                   "Bom", tb$`Como avalia o estado de conservação daquele lugar?`)
+
+tb$`Como avalia o estado de conservação daquele lugar?` <- as.factor(tb$`Como avalia o estado de conservação daquele lugar?`)
 
 saveRDS(tb, file = "tabela")
 ```
